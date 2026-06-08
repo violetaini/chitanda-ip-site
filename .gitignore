@@ -1,0 +1,13 @@
+node_modules/
+dist/
+public/status/data.json
+.env
+.env.*
+!.env.example
+
+_screenshots*/
+*.log
+*.tmp
+
+akihm-reference.png
+status-detail-*.png

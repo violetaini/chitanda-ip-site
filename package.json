@@ -1,0 +1,22 @@
+{
+  "name": "chitanda-ip-site",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "status:data": "node scripts/update-status-data.mjs --pretty",
+    "build": "node scripts/update-status-data.mjs && vite build && node scripts/copy-status-index.mjs",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.1.1",
+    "lucide-react": "^0.561.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.7"
+  },
+  "devDependencies": {
+    "playwright": "^1.60.0"
+  }
+}

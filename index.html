@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f8fafc" />
+    <link rel="icon" href="/favicon.ico?v=20260520" sizes="any" />
+    <title>Chitanda IP</title>
+    <script>
+      (() => {
+        const localeKey = 'chitanda.locale';
+        const localePaths = {
+          'zh-CN': '',
+          'zh-TW': 'zh-tw',
+          'ja-JP': 'ja',
+          'en-US': 'en'
+        };
+        const supportedPrefixes = new Set(Object.values(localePaths).filter(Boolean));
+        const pathParts = window.location.pathname.split('/').filter(Boolean);
+        if (supportedPrefixes.has(pathParts[0])) return;
+
+        const normalizeLocale = (value) => {
+          const locale = String(value || '').toLowerCase();
+          if (locale.startsWith('ja')) return 'ja-JP';
+          if (locale.includes('hant') || locale === 'zh-tw' || locale === 'zh-hk' || locale === 'zh-mo') return 'zh-TW';
+          if (locale.startsWith('zh')) return 'zh-CN';
+          if (locale.startsWith('en')) return 'en-US';
+          return '';
+        };
+
+        const preferredBrowserLocale = () => {
+          const languages = Array.isArray(navigator.languages) && navigator.languages.length
+            ? navigator.languages
+            : [navigator.language];
+          for (const language of languages) {
+            const locale = normalizeLocale(language);
+            if (Object.prototype.hasOwnProperty.call(localePaths, locale)) return locale;
+          }
+          return 'zh-CN';
+        };
+
+        let preferred = '';
+        try {
+          preferred = window.localStorage.getItem(localeKey) || '';
+        } catch {
+          preferred = '';
+        }
+        const locale = Object.prototype.hasOwnProperty.call(localePaths, preferred)
+          ? preferred
+          : preferredBrowserLocale();
+        const prefix = localePaths[locale];
+        if (!prefix) return;
+
+        const nextPath = `/${prefix}${window.location.pathname === '/' ? '/' : window.location.pathname}`;
+        window.location.replace(`${nextPath}${window.location.search}${window.location.hash}`);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
