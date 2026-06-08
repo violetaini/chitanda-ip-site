@@ -86,6 +86,10 @@ npm run status:data
 
 The status script aggregates public status APIs from OpenAI, Anthropic, Cloudflare, GitHub, Vercel, and other services. The generated dashboard uses embedded initial data and refreshes `/status/data.json` in the browser.
 
+## Automation
+
+Pushes to main run GitHub Actions, build the Vite app, package dist, and publish the build artifacts to GitHub Releases.
+
 ## License
 
 This project is open source under the [MIT License](LICENSE).
