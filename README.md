@@ -4,7 +4,7 @@ React + Vite front end for [ip.chitanda.net](https://ip.chitanda.net/). The site
 
 ## Features
 
-- Multi-language routes: Simplified Chinese, Traditional Chinese, Japanese, and English.
+- Multi-language routes and localized UI for Simplified Chinese, Traditional Chinese, Japanese, and English.
 - Browser preference redirect with a saved language preference override.
 - IP detection from domestic, international, Google, and independent probe endpoints.
 - IP lookup with map fallback handling.
@@ -24,6 +24,19 @@ React + Vite front end for [ip.chitanda.net](https://ip.chitanda.net/). The site
 /docs/api/                Public API documentation
 /zh-tw/, /ja/, /en/       Localized route prefixes
 ```
+
+## Multilingual Support
+
+The app ships with four locale variants:
+
+| Locale | Route Prefix | Button Label |
+| --- | --- | --- |
+| Simplified Chinese | `/` | `语言` |
+| Traditional Chinese | `/zh-tw/` | `語言` |
+| Japanese | `/ja/` | `言語` |
+| English | `/en/` | `lang` |
+
+When a visitor opens an unprefixed route, the early language script checks a saved `localStorage` preference first, then falls back to the browser language list. Existing prefixed routes are left unchanged.
 
 ## Requirements
 
@@ -73,4 +86,6 @@ The status script aggregates public status APIs from OpenAI, Anthropic, Cloudfla
 
 ## License
 
-This project is open source under the [MIT License](LICENSE).
+This project is source-available for noncommercial use under the [PolyForm Noncommercial License 1.0.0](LICENSE).
+
+Commercial use is not permitted without separate permission from the copyright holder.
