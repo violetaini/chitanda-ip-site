@@ -1,5 +1,7 @@
 # Chitanda IP Site
 
+[English](README.md) | [简体中文](README_zh.md) | [繁體中文](README_zh-TW.md) | [日本語](README_ja.md)
+
 React + Vite front end for [ip.chitanda.net](https://ip.chitanda.net/). The site provides browser-side IP detection, IP geolocation lookup, WebRTC/STUN network checks, CDN node lookup, DNS exit lookup, API documentation, and a service-status dashboard.
 
 ## Features
@@ -86,6 +88,4 @@ The status script aggregates public status APIs from OpenAI, Anthropic, Cloudfla
 
 ## License
 
-This project is source-available for noncommercial use under the [PolyForm Noncommercial License 1.0.0](LICENSE).
-
-Commercial use is not permitted without separate permission from the copyright holder.
+This project is open source under the [MIT License](LICENSE).

@@ -1,7 +1,7 @@
 {
   "name": "chitanda-ip-site",
   "version": "0.1.0",
-  "license": "PolyForm-Noncommercial-1.0.0",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
