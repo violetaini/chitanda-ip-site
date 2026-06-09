@@ -4,6 +4,7 @@ public/status/data.json
 .env
 .env.*
 !.env.example
+!.env.production
 
 _screenshots*/
 *.log
