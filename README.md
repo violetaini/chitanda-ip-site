@@ -72,11 +72,25 @@ The development server binds to `127.0.0.1` by default.
 Copy `.env.example` to `.env.local` and fill in only the values you need.
 
 ```text
+VITE_SITE_NAME                  Site display name
+VITE_HERO_TITLE_PREFIX          Home hero title left text
+VITE_HERO_TITLE_SEPARATOR       Home hero title middle text
+VITE_HERO_TITLE_SUFFIX          Home hero title right text
+VITE_SITE_HOSTNAME              Production hostname
+VITE_PUBLIC_BASE_URL            Public site URL used in API docs
+VITE_SITE_AVATAR_PATH           Top-left avatar asset path
+VITE_SITE_FAVICON_PATH          Browser favicon path
+VITE_LOCALE_STORAGE_KEY         Browser language preference key
 VITE_GEOIP_BASE                 GeoIP API endpoint override
 VITE_INTERNATIONAL_ENDPOINT     International IP probe endpoint
 VITE_DEFAULT_PROBE_ENDPOINT     Independent IP probe endpoint
 VITE_TENCENT_MAP_KEY            Optional Tencent Maps key
 VITE_GOOGLE_MAPS_EMBED_KEY      Optional Google Maps Embed key
+VITE_OWN_STUN_NAME              Optional self-owned STUN display name
+VITE_OWN_STUN_URL               Optional self-owned STUN URL
+VITE_OWN_STUN_REGION            Optional self-owned STUN region
+VITE_CDN_TENCENT_PROBE_URL      Optional self-owned Tencent CDN probe URL
+VITE_CDN_ALIYUN_PROBE_URL       Optional self-owned Alibaba Cloud ESA probe URL
 ```
 
 When `VITE_GEOIP_BASE` is not set, local development uses the public Chitanda GeoIP endpoint and production uses the same-origin `/api/geoip` path.
