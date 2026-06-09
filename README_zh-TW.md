@@ -8,8 +8,8 @@
 [![Contributors](https://img.shields.io/github/contributors/violetaini/chitanda-ip-site?style=for-the-badge)](https://github.com/violetaini/chitanda-ip-site/graphs/contributors)
 [![Commit activity](https://img.shields.io/github/commit-activity/w/violetaini/chitanda-ip-site?style=for-the-badge&color=black)](https://github.com/violetaini/chitanda-ip-site/commits/main)
 [![Repo size](https://img.shields.io/github/repo-size/violetaini/chitanda-ip-site?style=for-the-badge&color=pink)](https://github.com/violetaini/chitanda-ip-site)
-[![Stars](https://img.shields.io/github/stars/violetaini/chitanda-ip-site?style=for-the-badge&color=yellow)](https://github.com/violetaini/chitanda-ip-site/stargazers)
-[![Forks](https://img.shields.io/github/forks/violetaini/chitanda-ip-site?style=for-the-badge&color=white)](https://github.com/violetaini/chitanda-ip-site/forks)
+[![Stars](https://img.shields.io/github/stars/violetaini/chitanda-ip-site?style=for-the-badge&label=Stars&logo=github&color=yellow&cacheSeconds=3600)](https://github.com/violetaini/chitanda-ip-site/stargazers)
+[![Forks](https://img.shields.io/github/forks/violetaini/chitanda-ip-site?style=for-the-badge&label=Forks&logo=github&color=white&cacheSeconds=3600)](https://github.com/violetaini/chitanda-ip-site/forks)
 
 </div>
 
