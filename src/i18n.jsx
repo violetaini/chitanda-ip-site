@@ -24,7 +24,7 @@ const LOCALES = {
     path: 'ja',
     htmlLang: 'ja',
     name: '日本語',
-    short: '日',
+    short: 'JP',
     switchLabel: '言語'
   },
   'en-US': {
