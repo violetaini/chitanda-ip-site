@@ -51,8 +51,7 @@ const UPYUN_ENDPOINT = 'https://pubstatic.b0.upaiyun.com/?_upnode';
 const IPIP_ENDPOINT = 'https://myip.ipip.net/json';
 const GOOGLE_ENDPOINTS = [
   'https://ipcelou-298103.appspot.com/api/ip',
-  'https://groovy-student-432.appspot.com',
-  'https://jsonp-ip.appspot.com'
+  'https://groovy-student-432.appspot.com'
 ];
 const GOOGLE_MAP_PROBE_IMAGE = 'https://www.google.com/favicon.ico';
 const TENCENT_MAP_KEY = SITE_CONFIG.tencentMapKey;
