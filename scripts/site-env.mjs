@@ -17,7 +17,7 @@ export const DEFAULT_SITE_ENV = {
   VITE_TENCENT_MAP_KEY: '',
   VITE_GOOGLE_MAPS_EMBED_KEY: '',
   VITE_OWN_STUN_NAME: 'Chitanda STUN',
-  VITE_OWN_STUN_URL: 'stun:110.42.32.161:3478',
+  VITE_OWN_STUN_URL: '',
   VITE_OWN_STUN_REGION: 'domestic',
   VITE_CDN_TENCENT_PROBE_URL: 'https://cdn-tencent.chitanda.net/cdn-node',
   VITE_CDN_ALIYUN_PROBE_URL: 'https://cdn-aliyun.chitanda.net/cdn-node',

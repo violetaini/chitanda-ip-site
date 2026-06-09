@@ -14,7 +14,7 @@ const DEFAULT_SITE_CONFIG = {
   tencentMapKey: '',
   googleMapsEmbedKey: '',
   ownStunName: 'Chitanda STUN',
-  ownStunUrl: 'stun:110.42.32.161:3478',
+  ownStunUrl: '',
   ownStunRegion: 'domestic',
   tencentCdnProbeUrl: 'https://cdn-tencent.chitanda.net/cdn-node',
   aliyunCdnProbeUrl: 'https://cdn-aliyun.chitanda.net/cdn-node',
