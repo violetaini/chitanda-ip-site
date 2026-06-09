@@ -229,6 +229,13 @@ main {
   white-space: nowrap;
 }
 
+.language-switch-icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  stroke-width: 2.6;
+}
+
 .language-menu-panel {
   position: absolute;
   top: calc(100% + 8px);
@@ -1437,10 +1444,18 @@ html:is(:lang(en), :lang(ja)) .topbar-actions {
   }
 
   .topbar .language-switch {
-    width: 66px;
-    min-width: 66px;
+    width: 76px;
+    min-width: 76px;
     min-height: 44px;
     padding: 0 10px;
+    gap: 6px;
+    font-size: 13px;
+  }
+
+  .topbar .language-switch-icon {
+    width: 16px;
+    height: 16px;
+    flex-basis: 16px;
   }
 
   .hero-portal {
@@ -1490,7 +1505,8 @@ html:is(:lang(en), :lang(ja)) .topbar-actions {
   }
 
   .topbar .language-switch {
-    width: 64px;
+    width: 76px;
+    min-width: 76px;
     height: 42px;
     min-height: 42px;
   }
@@ -4479,6 +4495,17 @@ label,
   border-top: 1px solid rgba(226, 232, 240, 0.9);
 }
 
+.site-footer {
+  width: min(100%, 1080px);
+  margin: 34px auto 0;
+  padding: 18px 12px 4px;
+  border-top: 1px solid rgba(226, 232, 240, 0.88);
+  color: #617089;
+  font-size: 13px;
+  font-weight: 750;
+  text-align: center;
+}
+
 @keyframes statusShimmer {
   0% { background-position: 0% 50%; }
   100% { background-position: 200% 50%; }
@@ -6848,14 +6875,22 @@ body.status-mode {
   }
 
   .topbar .language-switch {
-    width: 64px;
-    min-width: 64px;
+    width: 76px;
+    min-width: 76px;
     min-height: 40px;
     padding: 0 9px;
+    gap: 6px;
+    font-size: 13px;
+  }
+
+  .topbar .language-switch-icon {
+    width: 16px;
+    height: 16px;
+    flex-basis: 16px;
   }
 
   html:is(:lang(zh-CN), :lang(zh-Hant)) .topbar {
-    grid-template-columns: 42px minmax(0, 1fr) 64px;
+    grid-template-columns: 42px minmax(0, 1fr) 76px;
     grid-template-areas: none;
     gap: 6px;
     width: 100%;
@@ -6903,7 +6938,7 @@ body.status-mode {
   }
 
   html:is(:lang(en), :lang(ja)) .topbar {
-    grid-template-columns: 42px minmax(0, 1fr) 64px;
+    grid-template-columns: 42px minmax(0, 1fr) 76px;
     grid-template-areas: none;
     justify-content: stretch;
     gap: 6px;
@@ -6947,8 +6982,8 @@ body.status-mode {
   }
 
   html:is(:lang(en), :lang(ja)) .topbar .language-switch {
-    width: 64px;
-    min-width: 64px;
+    width: 76px;
+    min-width: 76px;
     min-height: 40px;
     padding: 0 9px;
   }
