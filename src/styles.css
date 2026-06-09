@@ -2869,8 +2869,7 @@ label,
   background: #e8eef4;
 }
 
-.location-map-canvas,
-.location-map-canvas > div {
+.location-map-canvas {
   background: #e8eef4 !important;
 }
 
