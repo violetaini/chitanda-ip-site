@@ -955,6 +955,11 @@ function GoogleLocationMap({ coordinate }) {
 function BingLocationMap({ coordinate }) {
   const { t } = useI18n();
   const stageRef = useRef(null);
+  const iframeRef = useCallback((node) => {
+    if (!node) return;
+    node.setAttribute('scrolling', 'no');
+    node.style.overflow = 'hidden';
+  }, []);
   const [size, setSize] = useState({ width: 960, height: 430 });
 
   useEffect(() => {
@@ -988,9 +993,11 @@ function BingLocationMap({ coordinate }) {
   return (
     <div className="location-map-stage" ref={stageRef}>
       <iframe
+        ref={iframeRef}
         title={t('map.bingTitle')}
         src={src}
         loading="lazy"
+        scrolling="no"
         referrerPolicy="no-referrer-when-downgrade"
         allowFullScreen
       />
