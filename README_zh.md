@@ -70,11 +70,25 @@ npm run dev
 复制 `.env.example` 为 `.env.local`，按需填写配置。
 
 ```text
+VITE_SITE_NAME                  站点显示名称
+VITE_HERO_TITLE_PREFIX          首页大标题左侧文字
+VITE_HERO_TITLE_SEPARATOR       首页大标题中间文字
+VITE_HERO_TITLE_SUFFIX          首页大标题右侧文字
+VITE_SITE_HOSTNAME              生产环境主机名
+VITE_PUBLIC_BASE_URL            API 文档使用的公开站点地址
+VITE_SITE_AVATAR_PATH           左上角头像资源路径
+VITE_SITE_FAVICON_PATH          浏览器 favicon 路径
+VITE_LOCALE_STORAGE_KEY         浏览器语言偏好存储 key
 VITE_GEOIP_BASE                 GeoIP API 地址覆盖
 VITE_INTERNATIONAL_ENDPOINT     境外 IP 探针地址
 VITE_DEFAULT_PROBE_ENDPOINT     独立 IP 探针地址
 VITE_TENCENT_MAP_KEY            可选的腾讯地图 Key
 VITE_GOOGLE_MAPS_EMBED_KEY      可选的 Google Maps Embed Key
+VITE_OWN_STUN_NAME              可选自有 STUN 显示名称
+VITE_OWN_STUN_URL               可选自有 STUN 地址
+VITE_OWN_STUN_REGION            可选自有 STUN 区域
+VITE_CDN_TENCENT_PROBE_URL      可选自有腾讯 CDN 探针地址
+VITE_CDN_ALIYUN_PROBE_URL       可选自有阿里云 ESA 探针地址
 ```
 
 未设置 `VITE_GEOIP_BASE` 时，本地开发使用公开 Chitanda GeoIP 接口，生产环境使用同源 `/api/geoip`。
