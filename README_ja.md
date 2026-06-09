@@ -70,11 +70,25 @@ npm run dev
 `.env.example` を `.env.local` にコピーし、必要な値だけ設定してください。
 
 ```text
+VITE_SITE_NAME                  サイト表示名
+VITE_HERO_TITLE_PREFIX          ホームヒーロー見出しの左テキスト
+VITE_HERO_TITLE_SEPARATOR       ホームヒーロー見出しの中央テキスト
+VITE_HERO_TITLE_SUFFIX          ホームヒーロー見出しの右テキスト
+VITE_SITE_HOSTNAME              本番ホスト名
+VITE_PUBLIC_BASE_URL            API ドキュメントで使う公開サイト URL
+VITE_SITE_AVATAR_PATH           左上のアバター画像パス
+VITE_SITE_FAVICON_PATH          ブラウザ favicon パス
+VITE_LOCALE_STORAGE_KEY         ブラウザ言語設定の保存 key
 VITE_GEOIP_BASE                 GeoIP API エンドポイントの上書き
 VITE_INTERNATIONAL_ENDPOINT     国際 IP プローブエンドポイント
 VITE_DEFAULT_PROBE_ENDPOINT     独立 IP プローブエンドポイント
 VITE_TENCENT_MAP_KEY            任意の Tencent Maps キー
 VITE_GOOGLE_MAPS_EMBED_KEY      任意の Google Maps Embed キー
+VITE_OWN_STUN_NAME              任意の自前 STUN 表示名
+VITE_OWN_STUN_URL               任意の自前 STUN URL
+VITE_OWN_STUN_REGION            任意の自前 STUN リージョン
+VITE_CDN_TENCENT_PROBE_URL      任意の自前 Tencent CDN プローブ URL
+VITE_CDN_ALIYUN_PROBE_URL       任意の自前 Alibaba Cloud ESA プローブ URL
 ```
 
 `VITE_GEOIP_BASE` が未設定の場合、ローカル開発では公開 Chitanda GeoIP エンドポイントを使用し、本番環境では同一オリジンの `/api/geoip` を使用します。
