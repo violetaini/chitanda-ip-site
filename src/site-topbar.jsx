@@ -4,6 +4,8 @@ import { handleAppLinkClick } from './navigation.js';
 import { useI18n } from './i18n.jsx';
 import { SITE_CONFIG } from './site-config.js';
 
+const PROJECT_REPOSITORY_URL = 'https://github.com/violetaini/chitanda-ip-site';
+
 const navItems = [
   { id: 'home', href: '/#home', labelKey: 'nav.home' },
   { id: 'webrtc', href: '/webrtc/', labelKey: 'nav.webrtc' },
@@ -125,7 +127,10 @@ export function SiteFooter() {
 
   return (
     <footer className="site-footer">
-      Copyright © {year} All rights Reserved
+      <span>Copyright © {year} All rights Reserved</span>
+      <a href={PROJECT_REPOSITORY_URL} target="_blank" rel="noreferrer">
+        Powered by Chitanda IP
+      </a>
     </footer>
   );
 }

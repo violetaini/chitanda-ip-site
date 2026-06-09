@@ -4606,6 +4606,21 @@ label,
   font-size: 13px;
   font-weight: 750;
   text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+}
+
+.site-footer a {
+  color: #2563eb;
+  font-weight: 900;
+  text-decoration: none;
+  transition: color 0.18s ease, transform 0.18s ease;
+}
+
+.site-footer a:hover {
+  color: #ec4899;
+  transform: translateY(-1px);
 }
 
 @keyframes statusShimmer {

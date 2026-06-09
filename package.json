@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "status:data": "node scripts/update-status-data.mjs --pretty",
-    "build": "node scripts/update-status-data.mjs && vite build && node scripts/copy-status-index.mjs",
+    "build": "node scripts/assert-attribution.mjs && node scripts/update-status-data.mjs && vite build && node scripts/copy-status-index.mjs",
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {
