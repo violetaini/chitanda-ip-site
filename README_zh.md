@@ -93,9 +93,9 @@ VITE_CDN_ALIYUN_PROBE_URL       可选自有阿里云 ESA 探针地址
 
 未设置 `VITE_GEOIP_BASE` 时，本地开发使用公开 Chitanda GeoIP 接口，生产环境使用同源 `/api/geoip`。
 
-别人 fork 或自部署时，修改 `.env.production` 后再执行 `npm run build` 或 GitHub Actions 发布构建即可。仓库内的 `.env.production` 保留本站公开默认值，普通部署可通过它覆盖站点名、首页大标题、域名、公开 API 基础地址、头像/favicon、GeoIP 与探针端点、地图 Key、可选 STUN、可选 CDN 探针。`.env.production.local` 优先级更高且被 git 忽略，只用于本地或服务器侧私有值。
+别人 fork 或自部署时，修改 `.env.production` 后再执行 `npm run build` 或 GitHub Actions 发布构建即可。仓库内的 `.env.production` 保留本站公开默认值，普通部署可通过它覆盖站点名、首页大标题、域名、公开 API 基础地址、头像/favicon、GeoIP 与探针端点、公开浏览器地图 Key、可选公开 STUN、可选 CDN 探针。`.env.production.local` 优先级更高且被 git 忽略，只用于本地或明确不会发布到 GitHub Release 的私有服务器构建。
 
-**不要把私有地图 Key 或自建 STUN IP 提交到公开仓库或 GitHub Release 构建里。** 已提交的环境文件中 `VITE_TENCENT_MAP_KEY`、`VITE_GOOGLE_MAPS_EMBED_KEY` 和 `VITE_OWN_STUN_URL` 必须保持空；私有值只能放在未提交的 `.env.production.local` 或服务器构建环境变量中。
+**所有 `VITE_*` 值在构建后都会进入浏览器包。** 不要把私有地图 Key 或自建 STUN IP 提交到公开仓库或 GitHub Release 构建里。已提交的环境文件中 `VITE_TENCENT_MAP_KEY`、`VITE_GOOGLE_MAPS_EMBED_KEY` 和 `VITE_OWN_STUN_URL` 必须保持空；这里仅适合放公开、已限制域名的浏览器 Key，真正需要保密的值必须走服务端代理，不能放 Vite 环境变量。
 
 仓库徽章、许可证/版权文字、package 元信息和 Release 产物名称属于源码维护项，不纳入 env 自定义层。
 
