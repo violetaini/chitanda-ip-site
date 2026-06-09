@@ -1,7 +1,10 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { loadSiteEnv, siteEnvValue } from './site-env.mjs';
 
 const rootIndex = 'dist/index.html';
 const statusData = 'dist/status/data.json';
+const siteEnv = loadSiteEnv('production');
+const siteName = siteEnvValue(siteEnv, 'VITE_SITE_NAME');
 
 const routes = [
   { dir: 'dist/status', title: '服务状态 - Chitanda IP', injectStatusData: true },
@@ -42,6 +45,18 @@ function escapeInlineJson(json) {
     .replace(/\u2029/g, '\\u2029');
 }
 
+function applySiteName(value) {
+  return value.replaceAll('Chitanda IP', siteName);
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 async function main() {
   const html = await readFile(rootIndex, 'utf8');
   let statusDataScript = '';
@@ -55,8 +70,9 @@ async function main() {
 
   await Promise.all(routes.map(async (route) => {
     const indexPath = `${route.dir}/index.html`;
+    const titleNeedle = `<title>${escapeHtml(siteName)}</title>`;
     const routeHtml = html
-      .replace('<title>Chitanda IP</title>', `<title>${route.title}</title>`)
+      .replace(titleNeedle, `<title>${escapeHtml(applySiteName(route.title))}</title>`)
       .replace('</head>', `${route.injectStatusData ? statusDataScript : ''}\n  </head>`);
 
     await mkdir(route.dir, { recursive: true });
