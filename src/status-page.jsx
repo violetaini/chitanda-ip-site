@@ -4,7 +4,7 @@ import {
   Clock3,
   ShieldCheck,
 } from 'lucide-react';
-import { SiteTopbar } from './site-topbar.jsx';
+import { SiteFooter, SiteTopbar } from './site-topbar.jsx';
 import { useI18n } from './i18n.jsx';
 
 const STATUS_DATA_URL = '/status/data.json';
@@ -473,6 +473,7 @@ function StatusPage({ particles = [] }) {
         <div className="status-shell">
           <SiteTopbar active="status" className="status-global-topbar" />
           <LoadingState />
+          <SiteFooter />
         </div>
       </main>
     );
@@ -517,6 +518,7 @@ function StatusPage({ particles = [] }) {
         )}
 
         <StatusBrowser sections={sections} selectedKey={selectedKey} onSelect={setSelectedKey} />
+        <SiteFooter />
       </div>
     </main>
   );
