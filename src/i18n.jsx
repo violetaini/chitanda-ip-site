@@ -202,6 +202,19 @@ const messages = {
       title: '页面加载失败',
       copy: '当前页面资源加载失败，请刷新后重试。'
     },
+    errorPage: {
+      forbiddenPageTitle: '403 访问被拒绝 - Chitanda IP',
+      notFoundPageTitle: '404 页面不存在 - Chitanda IP',
+      forbiddenKicker: '403 Forbidden',
+      notFoundKicker: '404 Not Found',
+      forbiddenTitle: '访问被拒绝',
+      notFoundTitle: '页面不存在',
+      forbiddenCopy: '当前请求没有权限访问这个页面或资源。你可以返回首页，或查看服务状态和 API 文档。',
+      notFoundCopy: '这个地址没有对应的页面。可能是链接已过期，或者路径输入有误。',
+      homeAction: '返回首页',
+      apiAction: 'API 文档',
+      statusAction: '服务状态'
+    },
     webrtc: {
       pageTitle: 'WebRTC IP 检测 - Chitanda IP',
       heroTitle: 'WebRTC IP 检测',
@@ -526,6 +539,19 @@ const messages = {
     routeError: {
       title: 'Page Load Failed',
       copy: 'This page resource failed to load. Refresh and try again.'
+    },
+    errorPage: {
+      forbiddenPageTitle: '403 Forbidden - Chitanda IP',
+      notFoundPageTitle: '404 Not Found - Chitanda IP',
+      forbiddenKicker: '403 Forbidden',
+      notFoundKicker: '404 Not Found',
+      forbiddenTitle: 'Access denied',
+      notFoundTitle: 'Page not found',
+      forbiddenCopy: 'This request is not allowed to access the page or resource. Return home, or check service status and API docs.',
+      notFoundCopy: 'No page matches this address. The link may be expired, or the path may be mistyped.',
+      homeAction: 'Back home',
+      apiAction: 'API Docs',
+      statusAction: 'Service Status'
     },
     webrtc: {
       pageTitle: 'WebRTC IP Check - Chitanda IP',
@@ -931,6 +957,19 @@ messages[JA_LOCALE] = mergeMessages(messages[EN_LOCALE], {
   routeError: {
     title: 'ページ読み込み失敗',
     copy: 'ページリソースの読み込みに失敗しました。更新して再試行してください。'
+  },
+  errorPage: {
+    forbiddenPageTitle: '403 アクセス拒否 - Chitanda IP',
+    notFoundPageTitle: '404 ページが見つかりません - Chitanda IP',
+    forbiddenKicker: '403 Forbidden',
+    notFoundKicker: '404 Not Found',
+    forbiddenTitle: 'アクセスできません',
+    notFoundTitle: 'ページが見つかりません',
+    forbiddenCopy: 'このページまたはリソースへのアクセスは許可されていません。ホームに戻るか、サービス状態と API ドキュメントを確認してください。',
+    notFoundCopy: 'このアドレスに対応するページはありません。リンクが古いか、パスが間違っている可能性があります。',
+    homeAction: 'ホームへ戻る',
+    apiAction: 'API ドキュメント',
+    statusAction: 'サービス状態'
   },
   webrtc: {
     pageTitle: 'WebRTC IP チェック - Chitanda IP',

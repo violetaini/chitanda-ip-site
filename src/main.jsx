@@ -195,7 +195,7 @@ function usePageMotion(motionKey) {
 
   useLayoutEffect(() => {
     const root = document.documentElement;
-    const targets = document.querySelectorAll('.section-heading, .probe-card, .verdict-card, .api-panel, .lookup-page-head, .lookup-result-shell, .lookup-result-card, .lookup-detail-card, .location-map-card, .api-docs-hero, .api-endpoint-card, .api-terminal-card, .api-field-card, .webrtc-hero, .webrtc-metrics, .webrtc-verdict, .webrtc-results-card, .webrtc-node-card, .webrtc-note, .latency-hero, .latency-metrics, .latency-results-card, .cdn-node-hero, .cdn-node-metrics, .cdn-node-grid, .dns-exit-hero, .dns-exit-metrics, .dns-exit-results-card, .status-hero, .status-overall, .status-alert, .status-browser');
+    const targets = document.querySelectorAll('.section-heading, .probe-card, .verdict-card, .api-panel, .lookup-page-head, .lookup-result-shell, .lookup-result-card, .lookup-detail-card, .location-map-card, .api-docs-hero, .api-endpoint-card, .api-terminal-card, .api-field-card, .webrtc-hero, .webrtc-metrics, .webrtc-verdict, .webrtc-results-card, .webrtc-node-card, .webrtc-note, .latency-hero, .latency-metrics, .latency-results-card, .cdn-node-hero, .cdn-node-metrics, .cdn-node-grid, .dns-exit-hero, .dns-exit-metrics, .dns-exit-results-card, .status-hero, .status-overall, .status-alert, .status-browser, .error-page-hero');
     if (!targets.length) return undefined;
 
     root.classList.add('motion-ready');
@@ -754,6 +754,34 @@ function usePathname() {
   }, []);
 
   return pathname;
+}
+
+function normalizeRoutePath(pathname = '/') {
+  const normalized = (pathname || '/')
+    .replace(/\/index\.html$/i, '/')
+    .replace(/\.html$/i, '')
+    .replace(/\/+$/g, '');
+  return normalized || '/';
+}
+
+function matchesRoutePath(pathname, routePath) {
+  const normalized = normalizeRoutePath(pathname);
+  return normalized === routePath || normalized.startsWith(`${routePath}/`);
+}
+
+function explicitErrorTypeFromPathname(pathname) {
+  const normalized = normalizeRoutePath(pathname);
+  if (normalized === '/403') return '403';
+  if (normalized === '/404') return '404';
+  return '';
+}
+
+function staticErrorTypeOverride() {
+  const forcedType = window.__STATIC_ERROR_PAGE__;
+  if (forcedType !== '403' && forcedType !== '404') return '';
+  const forcedPath = window.__STATIC_ERROR_PAGE_PATH__;
+  if (forcedPath && forcedPath !== window.location.pathname) return '';
+  return forcedType;
 }
 
 function goToLookup(ip) {
@@ -1557,6 +1585,42 @@ function ApiDocsPage() {
   );
 }
 
+function ErrorPage({ statusCode }) {
+  const { localizedPath, t } = useI18n();
+  const isForbidden = statusCode === '403';
+  const Icon = isForbidden ? ShieldCheck : Search;
+  const pageTitle = isForbidden ? t('errorPage.forbiddenPageTitle') : t('errorPage.notFoundPageTitle');
+  const kicker = isForbidden ? t('errorPage.forbiddenKicker') : t('errorPage.notFoundKicker');
+  const title = isForbidden ? t('errorPage.forbiddenTitle') : t('errorPage.notFoundTitle');
+  const copy = isForbidden ? t('errorPage.forbiddenCopy') : t('errorPage.notFoundCopy');
+
+  useEffect(() => {
+    document.title = pageTitle;
+  }, [pageTitle]);
+
+  return (
+    <section className={`error-page error-page--${statusCode}`} aria-labelledby="error-page-title">
+      <section className="error-page-hero">
+        <span className="section-kicker error-page-kicker"><Icon size={16} /> {kicker}</span>
+        <div className="error-page-code" aria-hidden="true">{statusCode}</div>
+        <h1 id="error-page-title">{title}</h1>
+        <p>{copy}</p>
+        <div className="error-page-actions">
+          <a className="error-page-action error-page-action--primary" href={localizedPath('/#home')} onClick={handleAppLinkClick}>
+            {t('errorPage.homeAction')} <ArrowRight size={16} />
+          </a>
+          <a className="error-page-action" href={localizedPath('/docs/api/')} onClick={handleAppLinkClick}>
+            {t('errorPage.apiAction')} <BookOpen size={16} />
+          </a>
+          <a className="error-page-action" href={localizedPath('/status/')} onClick={handleAppLinkClick}>
+            {t('errorPage.statusAction')} <Server size={16} />
+          </a>
+        </div>
+      </section>
+    </section>
+  );
+}
+
 function isRouteChunkError(error) {
   const text = `${error?.name || ''} ${error?.message || ''}`;
   return /ChunkLoadError|Failed to fetch dynamically imported module|Importing a module script failed|error loading dynamically imported module|Load failed/i.test(text);
@@ -1628,13 +1692,18 @@ function App() {
   const [results, setResults] = useState({});
   const route = useHashRoute();
   const pathname = usePathname();
-  const isStatusRoute = pathname.startsWith('/status');
-  const isWebRtcRoute = pathname.startsWith('/webrtc');
-  const isLatencyRoute = pathname.startsWith('/latency');
-  const isCdnNodeRoute = pathname.startsWith('/cdn-node-lookup');
-  const isDnsExitRoute = pathname.startsWith('/dns-exit-lookup');
-  const isApiDocsRoute = pathname.startsWith('/docs/api');
-  const particles = usePageMotion(isStatusRoute ? 'status' : isWebRtcRoute ? 'webrtc' : isLatencyRoute ? 'latency' : isCdnNodeRoute ? 'cdn-node' : isDnsExitRoute ? 'dns-exit' : isApiDocsRoute ? 'api-docs' : route.page);
+  const isHomeRoute = normalizeRoutePath(pathname) === '/';
+  const isStatusRoute = matchesRoutePath(pathname, '/status');
+  const isWebRtcRoute = matchesRoutePath(pathname, '/webrtc');
+  const isLatencyRoute = matchesRoutePath(pathname, '/latency');
+  const isCdnNodeRoute = matchesRoutePath(pathname, '/cdn-node-lookup');
+  const isDnsExitRoute = matchesRoutePath(pathname, '/dns-exit-lookup');
+  const isApiDocsRoute = matchesRoutePath(pathname, '/docs/api');
+  const explicitErrorType = explicitErrorTypeFromPathname(pathname);
+  const isKnownPath = isHomeRoute || isStatusRoute || isWebRtcRoute || isLatencyRoute || isCdnNodeRoute || isDnsExitRoute || isApiDocsRoute || Boolean(explicitErrorType);
+  const staticErrorType = staticErrorTypeOverride();
+  const errorType = staticErrorType || explicitErrorType || (isKnownPath ? '' : '404');
+  const particles = usePageMotion(errorType ? `error-${errorType}` : isStatusRoute ? 'status' : isWebRtcRoute ? 'webrtc' : isLatencyRoute ? 'latency' : isCdnNodeRoute ? 'cdn-node' : isDnsExitRoute ? 'dns-exit' : isApiDocsRoute ? 'api-docs' : route.page);
   const probes = useMemo(() => getProbeDefinitions(t), [t]);
 
   async function runProbe(id, ipFactory) {
@@ -1670,11 +1739,11 @@ function App() {
   }
 
   useEffect(() => {
-    if (!isStatusRoute && !isWebRtcRoute && !isLatencyRoute && !isCdnNodeRoute && !isDnsExitRoute && !isApiDocsRoute && route.page === 'home') runAll();
-  }, [route.page, isStatusRoute, isWebRtcRoute, isLatencyRoute, isCdnNodeRoute, isDnsExitRoute, isApiDocsRoute, locale]);
+    if (!errorType && !isStatusRoute && !isWebRtcRoute && !isLatencyRoute && !isCdnNodeRoute && !isDnsExitRoute && !isApiDocsRoute && route.page === 'home') runAll();
+  }, [route.page, errorType, isStatusRoute, isWebRtcRoute, isLatencyRoute, isCdnNodeRoute, isDnsExitRoute, isApiDocsRoute, locale]);
 
   useEffect(() => {
-    if (isStatusRoute || isWebRtcRoute || isLatencyRoute || isCdnNodeRoute || isDnsExitRoute) return undefined;
+    if (errorType || isStatusRoute || isWebRtcRoute || isLatencyRoute || isCdnNodeRoute || isDnsExitRoute) return undefined;
 
     const preload = () => {
       Object.values(routeModules).forEach((loadRoute) => {
@@ -1689,17 +1758,17 @@ function App() {
 
     const timer = window.setTimeout(preload, 1600);
     return () => window.clearTimeout(timer);
-  }, [isStatusRoute, isWebRtcRoute, isLatencyRoute, isCdnNodeRoute, isDnsExitRoute]);
+  }, [errorType, isStatusRoute, isWebRtcRoute, isLatencyRoute, isCdnNodeRoute, isDnsExitRoute]);
 
   useEffect(() => {
-    if (isStatusRoute || isWebRtcRoute || isLatencyRoute || isCdnNodeRoute || isDnsExitRoute || isApiDocsRoute) return undefined;
+    if (errorType || isStatusRoute || isWebRtcRoute || isLatencyRoute || isCdnNodeRoute || isDnsExitRoute || isApiDocsRoute) return undefined;
 
     document.title = SITE_CONFIG.siteName;
     if (!window.location.hash || route.page !== 'home') return undefined;
 
     const timer = window.setTimeout(() => scrollToHash(window.location.hash), 0);
     return () => window.clearTimeout(timer);
-  }, [isStatusRoute, isWebRtcRoute, isLatencyRoute, isCdnNodeRoute, isDnsExitRoute, isApiDocsRoute, pathname, route.page, locale]);
+  }, [errorType, isStatusRoute, isWebRtcRoute, isLatencyRoute, isCdnNodeRoute, isDnsExitRoute, isApiDocsRoute, pathname, route.page, locale]);
 
   useEffect(() => {
     if (!isWebRtcRoute) return undefined;
@@ -1715,7 +1784,7 @@ function App() {
 
   const verdict = useMemo(() => classifyRoute(results, t), [results, t]);
 
-  if (isStatusRoute) {
+  if (!errorType && isStatusRoute) {
     return (
       <AsyncRoute routeKey={pathname}>
         <StatusPage particles={particles} />
@@ -1741,11 +1810,13 @@ function App() {
         ))}
       </div>
       <SiteTopbar
-        active={isWebRtcRoute ? 'webrtc' : isLatencyRoute ? 'latency' : isCdnNodeRoute ? 'cdn' : isDnsExitRoute ? 'dns' : isApiDocsRoute ? 'api' : 'home'}
+        active={errorType ? '' : isWebRtcRoute ? 'webrtc' : isLatencyRoute ? 'latency' : isCdnNodeRoute ? 'cdn' : isDnsExitRoute ? 'dns' : isApiDocsRoute ? 'api' : 'home'}
       />
 
       <>
-        {isApiDocsRoute ? (
+        {errorType ? (
+          <ErrorPage statusCode={errorType} />
+        ) : isApiDocsRoute ? (
           <ApiDocsPage />
         ) : isLatencyRoute ? (
           <AsyncRoute routeKey={pathname}>
