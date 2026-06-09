@@ -87,7 +87,7 @@ export function SiteTopbar({
             aria-expanded={languageMenuOpen}
             onClick={() => setLanguageMenuOpen((open) => !open)}
           >
-            <Languages size={16} />
+            <Languages className="language-switch-icon" size={18} aria-hidden="true" />
             <span>{localeInfo.switchLabel}</span>
           </button>
           {languageMenuOpen ? (
@@ -110,5 +110,21 @@ export function SiteTopbar({
         </div>
       </div>
     </header>
+  );
+}
+
+export function SiteFooter() {
+  const [year, setYear] = useState(() => new Date().getFullYear());
+
+  useEffect(() => {
+    const syncYear = () => setYear(new Date().getFullYear());
+    const intervalId = window.setInterval(syncYear, 60 * 1000);
+    return () => window.clearInterval(intervalId);
+  }, []);
+
+  return (
+    <footer className="site-footer">
+      Copyright © {year} All rights Reserved
+    </footer>
   );
 }
