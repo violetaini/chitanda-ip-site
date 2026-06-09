@@ -11,12 +11,17 @@ import {
 } from 'lucide-react';
 import { useI18n } from './i18n.jsx';
 import { normalizeLocationPieces, normalizePoliticalName } from './political-names.js';
+import { getGeoipBase, SITE_CONFIG } from './site-config.js';
 
-const GEOIP_BASE = import.meta.env.VITE_GEOIP_BASE
-  || (window.location.hostname === 'ip.chitanda.net' ? '/api/geoip' : 'https://ip.chitanda.net/geoip');
+const GEOIP_BASE = getGeoipBase();
 
 const STUN_SERVERS = [
-  { id: 'cn-chitanda', name: 'Chitanda STUN', region: 'domestic', urls: 'stun:110.42.32.161:3478' },
+  ...(SITE_CONFIG.ownStunUrl ? [{
+    id: 'own-stun',
+    name: SITE_CONFIG.ownStunName,
+    region: SITE_CONFIG.ownStunRegion,
+    urls: SITE_CONFIG.ownStunUrl
+  }] : []),
   { id: 'cn-miwifi', name: '小米路由器', region: 'domestic', urls: 'stun:stun.miwifi.com:3478' },
   { id: 'cn-bilibili', name: 'Bilibili', region: 'domestic', urls: 'stun:39.107.142.158:3478' },
   { id: 'cn-hitv', name: '芒果 TV', region: 'domestic', urls: 'stun:stun.hitv.com:3478' },
