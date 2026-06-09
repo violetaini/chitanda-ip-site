@@ -9,9 +9,9 @@ import {
 } from 'lucide-react';
 import { useI18n } from './i18n.jsx';
 import { normalizePoliticalName } from './political-names.js';
+import { getGeoipBase } from './site-config.js';
 
-const GEOIP_BASE = import.meta.env.VITE_GEOIP_BASE
-  || (window.location.hostname === 'ip.chitanda.net' ? '/api/geoip' : 'https://ip.chitanda.net/geoip');
+const GEOIP_BASE = getGeoipBase();
 
 const TOKEN_ALPHABET = 'useandom2619834075pxbfghjklqvwyzrict';
 const PROVIDER_TIMEOUT = 9000;
