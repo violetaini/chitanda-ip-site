@@ -57,6 +57,8 @@ const GOOGLE_ENDPOINTS = [
 const GOOGLE_MAP_PROBE_IMAGE = 'https://www.google.com/favicon.ico';
 const TENCENT_MAP_KEY = SITE_CONFIG.tencentMapKey;
 const GOOGLE_MAPS_EMBED_KEY = SITE_CONFIG.googleMapsEmbedKey;
+const TENCENT_MAP_SCRIPT_TIMEOUT_MS = 8000;
+const TENCENT_MAP_TILE_TIMEOUT_MS = 7000;
 const MAINLAND_CHINA_REGION_CODES = new Set(['CN']);
 const NON_MAINLAND_CHINA_REGION_CODES = new Set(['HK', 'MO', 'TW']);
 const CHINA_TW_REGION_NAME = `中国${String.fromCharCode(21488, 28286)}`;
@@ -483,9 +485,32 @@ function loadTencentMapScript() {
   if (!tencentMapScriptPromise) {
     tencentMapScriptPromise = new Promise((resolve, reject) => {
       const existing = document.querySelector('script[data-tencent-map-sdk="true"]');
+      let timer;
+
+      const cleanup = () => {
+        window.clearTimeout(timer);
+      };
+
+      const fail = (script) => {
+        cleanup();
+        tencentMapScriptPromise = null;
+        script?.remove();
+        reject(new Error('tencent map sdk failed'));
+      };
+
+      const succeed = () => {
+        cleanup();
+        if (window.TMap?.Map) {
+          resolve(window.TMap);
+        } else {
+          fail(existing);
+        }
+      };
+
       if (existing) {
-        existing.addEventListener('load', () => resolve(window.TMap), { once: true });
-        existing.addEventListener('error', () => reject(new Error('tencent map sdk failed')), { once: true });
+        timer = window.setTimeout(() => fail(existing), TENCENT_MAP_SCRIPT_TIMEOUT_MS);
+        existing.addEventListener('load', succeed, { once: true });
+        existing.addEventListener('error', () => fail(existing), { once: true });
         return;
       }
 
@@ -493,13 +518,54 @@ function loadTencentMapScript() {
       script.dataset.tencentMapSdk = 'true';
       script.async = true;
       script.src = `https://map.qq.com/api/gljs?v=1.exp&key=${encodeURIComponent(TENCENT_MAP_KEY)}`;
-      script.onload = () => resolve(window.TMap);
-      script.onerror = () => reject(new Error('tencent map sdk failed'));
+      timer = window.setTimeout(() => fail(script), TENCENT_MAP_SCRIPT_TIMEOUT_MS);
+      script.onload = () => {
+        cleanup();
+        if (window.TMap?.Map) {
+          resolve(window.TMap);
+        } else {
+          fail(script);
+        }
+      };
+      script.onerror = () => fail(script);
       document.head.appendChild(script);
     });
   }
 
   return tencentMapScriptPromise;
+}
+
+function waitForTencentMapTiles(map) {
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    let timer;
+
+    const cleanup = () => {
+      window.clearTimeout(timer);
+      if (typeof map.off === 'function') {
+        map.off('tilesloaded', handleReady);
+      }
+    };
+
+    const settle = (callback) => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      callback();
+    };
+
+    const handleReady = () => settle(resolve);
+
+    timer = window.setTimeout(() => {
+      settle(() => reject(new Error('tencent map tiles timeout')));
+    }, TENCENT_MAP_TILE_TIMEOUT_MS);
+
+    if (typeof map.on === 'function') {
+      map.on('tilesloaded', handleReady);
+    } else {
+      window.requestAnimationFrame(() => window.requestAnimationFrame(handleReady));
+    }
+  });
 }
 
 function loadWrappedJsonp(url) {
@@ -824,7 +890,12 @@ function TencentLocationMap({ coordinate, onUnavailable }) {
           }]
         });
 
-        setState('ready');
+        return waitForTencentMapTiles(mapInstanceRef.current);
+      })
+      .then(() => {
+        if (!disposed) {
+          setState('ready');
+        }
       })
       .catch(() => {
         if (!disposed) {
