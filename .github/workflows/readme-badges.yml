@@ -1,0 +1,39 @@
+name: README Badges
+
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: readme-badges-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  update-readme-badges:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Update badge data
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/update-readme-badge-data.mjs
+
+      - name: Commit badge data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/badges/*.json
+          git diff --cached --quiet || git commit -m "docs: update readme badge data"
+          git push

@@ -4,14 +4,14 @@
 
 # **Chitanda IP Site**
 
-[![Version](https://img.shields.io/badge/Latest%20Version-v0.1.0-2563eb?style=for-the-badge)](package.json)
+[![Version](https://img.shields.io/endpoint?style=for-the-badge&url=https%3A%2F%2Fraw.githubusercontent.com%2Fvioletaini%2Fchitanda-ip-site%2Fmain%2F.github%2Fbadges%2Fversion.json&cacheSeconds=3600)](package.json)
 [![JavaScript](https://img.shields.io/badge/JavaScript-React%20%2B%20Vite-f7df1e?style=for-the-badge)](https://github.com/violetaini/chitanda-ip-site)
 [![License](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)](LICENSE)
-[![Contributors](https://img.shields.io/github/contributors/violetaini/chitanda-ip-site?style=for-the-badge)](https://github.com/violetaini/chitanda-ip-site/graphs/contributors)
-[![Commit activity](https://img.shields.io/github/commit-activity/w/violetaini/chitanda-ip-site?style=for-the-badge&color=black)](https://github.com/violetaini/chitanda-ip-site/commits/main)
-[![Repo size](https://img.shields.io/github/repo-size/violetaini/chitanda-ip-site?style=for-the-badge&color=pink)](https://github.com/violetaini/chitanda-ip-site)
-[![Stars](https://img.shields.io/github/stars/violetaini/chitanda-ip-site?style=for-the-badge&label=Stars&logo=github&color=yellow&cacheSeconds=3600)](https://github.com/violetaini/chitanda-ip-site/stargazers)
-[![Forks](https://img.shields.io/github/forks/violetaini/chitanda-ip-site?style=for-the-badge&label=Forks&logo=github&color=white&cacheSeconds=3600)](https://github.com/violetaini/chitanda-ip-site/forks)
+[![Contributors](https://img.shields.io/endpoint?style=for-the-badge&url=https%3A%2F%2Fraw.githubusercontent.com%2Fvioletaini%2Fchitanda-ip-site%2Fmain%2F.github%2Fbadges%2Fcontributors.json&cacheSeconds=3600)](https://github.com/violetaini/chitanda-ip-site/graphs/contributors)
+[![Commit activity](https://img.shields.io/endpoint?style=for-the-badge&url=https%3A%2F%2Fraw.githubusercontent.com%2Fvioletaini%2Fchitanda-ip-site%2Fmain%2F.github%2Fbadges%2Fcommit-activity.json&cacheSeconds=3600)](https://github.com/violetaini/chitanda-ip-site/commits/main)
+[![Repo size](https://img.shields.io/endpoint?style=for-the-badge&url=https%3A%2F%2Fraw.githubusercontent.com%2Fvioletaini%2Fchitanda-ip-site%2Fmain%2F.github%2Fbadges%2Frepo-size.json&cacheSeconds=3600)](https://github.com/violetaini/chitanda-ip-site)
+[![Stars](https://img.shields.io/endpoint?style=for-the-badge&logo=github&url=https%3A%2F%2Fraw.githubusercontent.com%2Fvioletaini%2Fchitanda-ip-site%2Fmain%2F.github%2Fbadges%2Fstars.json&cacheSeconds=3600)](https://github.com/violetaini/chitanda-ip-site/stargazers)
+[![Forks](https://img.shields.io/endpoint?style=for-the-badge&logo=github&url=https%3A%2F%2Fraw.githubusercontent.com%2Fvioletaini%2Fchitanda-ip-site%2Fmain%2F.github%2Fbadges%2Fforks.json&cacheSeconds=3600)](https://github.com/violetaini/chitanda-ip-site/forks)
 
 </div>
 
