@@ -95,9 +95,9 @@ VITE_CDN_ALIYUN_PROBE_URL       Optional self-owned Alibaba Cloud ESA probe URL
 
 When `VITE_GEOIP_BASE` is not set, local development uses the public Chitanda GeoIP endpoint and production uses the same-origin `/api/geoip` path.
 
-For a fork or self-hosted build, edit `.env.production` before running `npm run build` or the GitHub Actions release workflow. The checked-in file keeps Chitanda's public defaults, so changing it is enough for the normal deployment surface: site name, hero title, domain, public API base URL, avatar/favicon paths, GeoIP and probe endpoints, map keys, optional STUN, and optional CDN probes. `.env.production.local` has higher priority and is ignored by git, so use it only for local or server-only private values.
+For a fork or self-hosted build, edit `.env.production` before running `npm run build` or the GitHub Actions release workflow. The checked-in file keeps Chitanda's public defaults, so changing it is enough for the normal deployment surface: site name, hero title, domain, public API base URL, avatar/favicon paths, GeoIP and probe endpoints, public browser map keys, optional public STUN, and optional CDN probes. `.env.production.local` has higher priority and is ignored by git, so use it only for local or private server builds that you intentionally do not publish as GitHub Release artifacts.
 
-**Do not commit private map keys or self-owned STUN IPs to the public repository or GitHub Release builds.** Keep `VITE_TENCENT_MAP_KEY`, `VITE_GOOGLE_MAPS_EMBED_KEY`, and `VITE_OWN_STUN_URL` empty in committed env files. Put private values only in `.env.production.local` or server build environment variables.
+**Every `VITE_*` value is browser-visible after build.** Do not commit private map keys or self-owned STUN IPs to the public repository or GitHub Release builds. Keep `VITE_TENCENT_MAP_KEY`, `VITE_GOOGLE_MAPS_EMBED_KEY`, and `VITE_OWN_STUN_URL` empty in committed env files. Use only public, domain-restricted browser keys here; values that must remain private need a server-side proxy instead of a Vite env variable.
 
 Repository badges, license/copyright text, package metadata, and release artifact names are source-maintenance fields and are not part of the env customization layer.
 
