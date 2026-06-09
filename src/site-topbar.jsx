@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Languages } from 'lucide-react';
 import { handleAppLinkClick } from './navigation.js';
 import { useI18n } from './i18n.jsx';
+import { SITE_CONFIG } from './site-config.js';
 
 const navItems = [
   { id: 'home', href: '/#home', labelKey: 'nav.home' },
@@ -28,7 +29,7 @@ export function SiteTopbar({
       return;
     }
     try {
-      window.localStorage.setItem('chitanda.locale', targetLocale);
+      window.localStorage.setItem(SITE_CONFIG.localeStorageKey, targetLocale);
     } catch {
       // Ignore storage failures in private browsing or restricted environments.
     }
@@ -61,7 +62,7 @@ export function SiteTopbar({
   return (
     <header className={headerClass}>
       <a className="nav-avatar" href={localizedPath('/#home')} aria-label={t('nav.homeAria')} onClick={handleAppLinkClick}>
-        <img src="/avatar.webp" alt="" />
+        <img src={SITE_CONFIG.avatarPath} alt="" />
       </a>
       <nav className="nav-links" aria-label={t('nav.navigation')}>
         {navItems.map((item) => (
