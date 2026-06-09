@@ -24,6 +24,7 @@ import { SiteFooter, SiteTopbar } from './site-topbar.jsx';
 import { handleAppLinkClick, scrollToHash } from './navigation.js';
 import { I18nProvider, stripLocaleFromPathname, useI18n } from './i18n.jsx';
 import { normalizeLocationPieces, normalizePoliticalName } from './political-names.js';
+import { getGeoipBase, SITE_CONFIG } from './site-config.js';
 
 const ROUTE_CHUNK_RELOAD_KEY = 'chitanda-route-chunk-reloaded';
 
@@ -41,10 +42,9 @@ const LatencyPage = lazy(routeModules.latency);
 const StatusPage = lazy(routeModules.status);
 const WebRtcPage = lazy(routeModules.webrtc);
 
-const GEOIP_BASE = import.meta.env.VITE_GEOIP_BASE
-  || (window.location.hostname === 'ip.chitanda.net' ? '/api/geoip' : 'https://ip.chitanda.net/geoip');
-const INTERNATIONAL_ENDPOINT = import.meta.env.VITE_INTERNATIONAL_ENDPOINT || 'https://ip.chitanda.org/';
-const DEFAULT_PROBE_ENDPOINT = import.meta.env.VITE_DEFAULT_PROBE_ENDPOINT || 'https://probe.chitanda.org/';
+const GEOIP_BASE = getGeoipBase();
+const INTERNATIONAL_ENDPOINT = SITE_CONFIG.internationalEndpoint;
+const DEFAULT_PROBE_ENDPOINT = SITE_CONFIG.defaultProbeEndpoint;
 const PCONLINE_ENDPOINT = 'https://whois.pconline.com.cn/ipJson.jsp';
 const QQ_NEWS_ENDPOINT = 'https://r.inews.qq.com/api/ip2city?otype=jsonp';
 const UPYUN_ENDPOINT = 'https://pubstatic.b0.upaiyun.com/?_upnode';
@@ -55,8 +55,8 @@ const GOOGLE_ENDPOINTS = [
   'https://jsonp-ip.appspot.com'
 ];
 const GOOGLE_MAP_PROBE_IMAGE = 'https://www.google.com/favicon.ico';
-const TENCENT_MAP_KEY = import.meta.env.VITE_TENCENT_MAP_KEY || '';
-const GOOGLE_MAPS_EMBED_KEY = import.meta.env.VITE_GOOGLE_MAPS_EMBED_KEY || '';
+const TENCENT_MAP_KEY = SITE_CONFIG.tencentMapKey;
+const GOOGLE_MAPS_EMBED_KEY = SITE_CONFIG.googleMapsEmbedKey;
 const MAINLAND_CHINA_REGION_CODES = new Set(['CN']);
 const NON_MAINLAND_CHINA_REGION_CODES = new Set(['HK', 'MO', 'TW']);
 const CHINA_TW_REGION_NAME = `中国${String.fromCharCode(21488, 28286)}`;
@@ -1175,7 +1175,7 @@ function LookupResultPage({ ip }) {
   );
 }
 
-const API_BASE_URL = 'https://ip.chitanda.net';
+const API_BASE_URL = SITE_CONFIG.publicBaseUrl;
 
 function getApiEndpoints(t, locale) {
   const sampleCountry = locale.startsWith('zh') ? '美国' : 'United States';
@@ -1394,7 +1394,7 @@ function ApiDocsPage() {
     <section className="api-docs-page">
       <section className="status-hero api-docs-hero">
         <span className="section-kicker"><BookOpen size={16} /> API Docs</span>
-        <h1>Chitanda IP API</h1>
+        <h1>{SITE_CONFIG.siteName} API</h1>
         <p>{t('api.heroCopy')}</p>
         <div className="api-base-strip">
           <span>Base URL</span>
@@ -1588,7 +1588,7 @@ function App() {
   useEffect(() => {
     if (isStatusRoute || isWebRtcRoute || isLatencyRoute || isCdnNodeRoute || isDnsExitRoute || isApiDocsRoute) return undefined;
 
-    document.title = 'Chitanda IP';
+    document.title = SITE_CONFIG.siteName;
     if (!window.location.hash || route.page !== 'home') return undefined;
 
     const timer = window.setTimeout(() => scrollToHash(window.location.hash), 0);
@@ -1664,15 +1664,15 @@ function App() {
             <section className="hero-portal" id="home">
               <div className="hero-avatar-shell" aria-hidden="true">
                 <div className="hero-avatar">
-                  <img src="/avatar.webp" alt="" />
+                  <img src={SITE_CONFIG.avatarPath} alt="" />
                 </div>
               </div>
 
               <div className="hero-title-block">
                 <div className="hero-title-line">
-                  <span className="title-blue">CHITANDA</span>
-                  <span className="title-no">の</span>
-                  <span className="title-pink">IP</span>
+                  <span className="title-blue">{SITE_CONFIG.heroTitlePrefix}</span>
+                  <span className="title-no">{SITE_CONFIG.heroTitleSeparator}</span>
+                  <span className="title-pink">{SITE_CONFIG.heroTitleSuffix}</span>
                 </div>
                 <div className="title-welcome">{t('home.welcome')}</div>
               </div>
