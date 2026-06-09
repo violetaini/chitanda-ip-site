@@ -883,10 +883,39 @@ function GoogleLocationMap({ coordinate }) {
 
 function BingLocationMap({ coordinate }) {
   const { t } = useI18n();
-  const src = `https://www.bing.com/maps/embed?h=430&w=960&cp=${coordinate.latitude}~${coordinate.longitude}&lvl=10&typ=d&sty=r&src=SHELL&FORM=MBEDV8`;
+  const stageRef = useRef(null);
+  const [size, setSize] = useState({ width: 960, height: 430 });
+
+  useEffect(() => {
+    const element = stageRef.current;
+    if (!element) return undefined;
+
+    const updateSize = () => {
+      const rect = element.getBoundingClientRect();
+      const width = Math.max(320, Math.round(rect.width));
+      const height = Math.max(280, Math.round(rect.height));
+      setSize((current) => (
+        current.width === width && current.height === height
+          ? current
+          : { width, height }
+      ));
+    };
+
+    updateSize();
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', updateSize);
+      return () => window.removeEventListener('resize', updateSize);
+    }
+
+    const observer = new ResizeObserver(updateSize);
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  const src = `https://www.bing.com/maps/embed?h=${size.height}&w=${size.width}&cp=${coordinate.latitude}~${coordinate.longitude}&lvl=10&typ=d&sty=r&src=SHELL&FORM=MBEDV8`;
 
   return (
-    <div className="location-map-stage">
+    <div className="location-map-stage" ref={stageRef}>
       <iframe
         title={t('map.bingTitle')}
         src={src}
