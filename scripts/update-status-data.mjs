@@ -1,10 +1,13 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
+import { loadSiteEnv, siteEnvValue } from './site-env.mjs';
 
 const DEFAULT_OUTPUT = 'public/status/data.json';
 const REQUEST_TIMEOUT = 15000;
 const CONCURRENCY = 6;
 const RECENT_LIMIT = 5;
+const siteEnv = loadSiteEnv('production');
+const statusUserAgent = `${siteEnvValue(siteEnv, 'VITE_SITE_NAME').replace(/\s+/g, '-')}-Status/1.0 (+${siteEnvValue(siteEnv, 'VITE_PUBLIC_BASE_URL')}/status/)`;
 
 const services = [
   {
@@ -320,7 +323,7 @@ async function fetchJsonOnce(url, timeoutMs = REQUEST_TIMEOUT) {
       signal: controller.signal,
       headers: {
         accept: 'application/json',
-        'user-agent': 'Chitanda-IP-Status/1.0 (+https://ip.chitanda.net/status/)'
+        'user-agent': statusUserAgent
       }
     });
 
