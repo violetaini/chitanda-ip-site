@@ -30,6 +30,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Guard public build env
+        run: node scripts/assert-public-build-env.mjs
+
       - name: Build
         run: npm run build
 
