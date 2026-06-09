@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { applySiteName } from './site-config.js';
 
 export const DEFAULT_LOCALE = 'zh-CN';
 export const EN_LOCALE = 'en-US';
@@ -1072,13 +1073,13 @@ function readMessage(locale, key) {
   for (const part of parts) {
     value = value?.[part];
   }
-  if (typeof value === 'string') return value;
+  if (typeof value === 'string') return applySiteName(value);
 
   value = messages[DEFAULT_LOCALE];
   for (const part of parts) {
     value = value?.[part];
   }
-  return typeof value === 'string' ? value : key;
+  return typeof value === 'string' ? applySiteName(value) : key;
 }
 
 function interpolate(template, values = {}) {
