@@ -8,6 +8,7 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import { useI18n } from './i18n.jsx';
+import { SITE_CONFIG } from './site-config.js';
 
 const PROBE_TIMEOUT = 8000;
 const PROBE_CONCURRENCY = 6;
@@ -240,7 +241,7 @@ const cdnProbes = [
     id: 'edgeone-owned',
     name: 'Tencent EdgeOne',
     familyKey: 'cdn.families.ownedEdgeone',
-    url: 'https://cdn-tencent.chitanda.net/cdn-node',
+    url: SITE_CONFIG.tencentCdnProbeUrl,
     parseHeaders: parseOwnedCdnNode,
     icon: iconFromDomain('edgeone.ai'),
     tone: 'blue',
@@ -249,7 +250,7 @@ const cdnProbes = [
     id: 'aliyun-esa',
     name: 'Alibaba Cloud ESA',
     familyKey: 'cdn.families.aliyunEsa',
-    url: 'https://cdn-aliyun.chitanda.net/cdn-node',
+    url: SITE_CONFIG.aliyunCdnProbeUrl,
     parseHeaders: parseAliyunEsa,
     icon: iconFromDomain('alibabacloud.com'),
     tone: 'orange',
@@ -342,6 +343,8 @@ const cdnProbes = [
     tone: 'violet',
   },
 ];
+
+const activeCdnProbes = cdnProbes.filter((probe) => probe.url);
 
 async function requestWithTimeout(probe) {
   const controller = new AbortController();
@@ -477,16 +480,16 @@ export function CdnNodePage() {
     const ready = items.filter((item) => item.state === 'ready').length;
     const error = items.filter((item) => item.state === 'error').length;
     const loading = items.filter((item) => item.state === 'loading').length;
-    return { ready, error, loading, total: cdnProbes.length };
+    return { ready, error, loading, total: activeCdnProbes.length };
   }, [results]);
 
   async function runAll() {
     if (running) return;
     setRunning(true);
-    setResults(Object.fromEntries(cdnProbes.map((probe) => [probe.id, { state: 'loading' }])));
+    setResults(Object.fromEntries(activeCdnProbes.map((probe) => [probe.id, { state: 'loading' }])));
 
-    for (let index = 0; index < cdnProbes.length; index += PROBE_CONCURRENCY) {
-      const batch = cdnProbes.slice(index, index + PROBE_CONCURRENCY);
+    for (let index = 0; index < activeCdnProbes.length; index += PROBE_CONCURRENCY) {
+      const batch = activeCdnProbes.slice(index, index + PROBE_CONCURRENCY);
       await Promise.all(batch.map(async (probe) => {
         const result = await requestWithTimeout(probe);
         setResults((current) => ({
@@ -526,7 +529,7 @@ export function CdnNodePage() {
       </section>
 
       <section className="cdn-node-grid" aria-label={t('cdn.gridAria')}>
-        {cdnProbes.map((probe) => (
+        {activeCdnProbes.map((probe) => (
           <CdnNodeCard
             key={probe.id}
             probe={probe}
