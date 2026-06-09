@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="public/avatar.webp" alt="Chitanda IP" width="120" />
+
 # **Chitanda IP Site**
 
 [![Version](https://img.shields.io/badge/Latest%20Version-v0.1.0-2563eb?style=for-the-badge)](package.json)
