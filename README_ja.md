@@ -1,5 +1,14 @@
 # Chitanda IP Site
 
+[![Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fvioletaini%2Fchitanda-ip-site%2Fmain%2Fpackage.json&query=%24.version&label=version&style=flat-square&color=2563eb)](package.json)
+[![Top language](https://img.shields.io/github/languages/top/violetaini/chitanda-ip-site?style=flat-square)](https://github.com/violetaini/chitanda-ip-site)
+[![License](https://img.shields.io/github/license/violetaini/chitanda-ip-site?style=flat-square)](LICENSE)
+[![Contributors](https://img.shields.io/github/contributors/violetaini/chitanda-ip-site?style=flat-square)](https://github.com/violetaini/chitanda-ip-site/graphs/contributors)
+[![Commit activity](https://img.shields.io/github/commit-activity/m/violetaini/chitanda-ip-site?style=flat-square)](https://github.com/violetaini/chitanda-ip-site/commits/main)
+[![Repo size](https://img.shields.io/github/repo-size/violetaini/chitanda-ip-site?style=flat-square)](https://github.com/violetaini/chitanda-ip-site)
+[![Stars](https://img.shields.io/github/stars/violetaini/chitanda-ip-site?style=flat-square)](https://github.com/violetaini/chitanda-ip-site/stargazers)
+[![Forks](https://img.shields.io/github/forks/violetaini/chitanda-ip-site?style=flat-square)](https://github.com/violetaini/chitanda-ip-site/forks)
+
 [English](README.md) | [简体中文](README_zh.md) | [繁體中文](README_zh-TW.md) | [日本語](README_ja.md)
 
 [ip.chitanda.net](https://ip.chitanda.net/) 向けの React + Vite フロントエンドです。ブラウザ側の IP 検出、IP 位置情報検索、WebRTC/STUN ネットワークチェック、CDN ノード検索、DNS 出口検索、API ドキュメント、サービス状態ダッシュボードを提供します。
