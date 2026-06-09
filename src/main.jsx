@@ -20,7 +20,7 @@ import {
   XCircle
 } from 'lucide-react';
 import './styles.css';
-import { SiteTopbar } from './site-topbar.jsx';
+import { SiteFooter, SiteTopbar } from './site-topbar.jsx';
 import { handleAppLinkClick, scrollToHash } from './navigation.js';
 import { I18nProvider, stripLocaleFromPathname, useI18n } from './i18n.jsx';
 import { normalizeLocationPieces, normalizePoliticalName } from './political-names.js';
@@ -1638,75 +1638,78 @@ function App() {
         active={isWebRtcRoute ? 'webrtc' : isLatencyRoute ? 'latency' : isCdnNodeRoute ? 'cdn' : isDnsExitRoute ? 'dns' : isApiDocsRoute ? 'api' : 'home'}
       />
 
-      {isApiDocsRoute ? (
-        <ApiDocsPage />
-      ) : isLatencyRoute ? (
-        <AsyncRoute routeKey={pathname}>
-          <LatencyPage />
-        </AsyncRoute>
-      ) : isCdnNodeRoute ? (
-        <AsyncRoute routeKey={pathname}>
-          <CdnNodePage />
-        </AsyncRoute>
-      ) : isDnsExitRoute ? (
-        <AsyncRoute routeKey={pathname}>
-          <DnsExitPage />
-        </AsyncRoute>
-      ) : isWebRtcRoute ? (
-        <AsyncRoute routeKey={pathname}>
-          <WebRtcPage />
-        </AsyncRoute>
-      ) : route.page === 'lookup' ? (
-        <LookupResultPage ip={route.ip} />
-      ) : (
-        <>
-          <section className="hero-portal" id="home">
-            <div className="hero-avatar-shell" aria-hidden="true">
-              <div className="hero-avatar">
-                <img src="/avatar.webp" alt="" />
+      <>
+        {isApiDocsRoute ? (
+          <ApiDocsPage />
+        ) : isLatencyRoute ? (
+          <AsyncRoute routeKey={pathname}>
+            <LatencyPage />
+          </AsyncRoute>
+        ) : isCdnNodeRoute ? (
+          <AsyncRoute routeKey={pathname}>
+            <CdnNodePage />
+          </AsyncRoute>
+        ) : isDnsExitRoute ? (
+          <AsyncRoute routeKey={pathname}>
+            <DnsExitPage />
+          </AsyncRoute>
+        ) : isWebRtcRoute ? (
+          <AsyncRoute routeKey={pathname}>
+            <WebRtcPage />
+          </AsyncRoute>
+        ) : route.page === 'lookup' ? (
+          <LookupResultPage ip={route.ip} />
+        ) : (
+          <>
+            <section className="hero-portal" id="home">
+              <div className="hero-avatar-shell" aria-hidden="true">
+                <div className="hero-avatar">
+                  <img src="/avatar.webp" alt="" />
+                </div>
               </div>
-            </div>
 
-            <div className="hero-title-block">
-              <div className="hero-title-line">
-                <span className="title-blue">CHITANDA</span>
-                <span className="title-no">の</span>
-                <span className="title-pink">IP</span>
+              <div className="hero-title-block">
+                <div className="hero-title-line">
+                  <span className="title-blue">CHITANDA</span>
+                  <span className="title-no">の</span>
+                  <span className="title-pink">IP</span>
+                </div>
+                <div className="title-welcome">{t('home.welcome')}</div>
               </div>
-              <div className="title-welcome">{t('home.welcome')}</div>
-            </div>
 
-            <p className="hero-lead">
-              {t('home.lead')}
-            </p>
+              <p className="hero-lead">
+                {t('home.lead')}
+              </p>
 
-            <div className="hero-actions">
-              <a href="#checks">{t('home.viewResults')} <ArrowRight size={16} /></a>
-              <a href={localizedPath('/docs/api/')} onClick={handleAppLinkClick}>{t('home.apiDocs')} <Server size={16} /></a>
-            </div>
+              <div className="hero-actions">
+                <a href="#checks">{t('home.viewResults')} <ArrowRight size={16} /></a>
+                <a href={localizedPath('/docs/api/')} onClick={handleAppLinkClick}>{t('home.apiDocs')} <Server size={16} /></a>
+              </div>
 
-            <LookupSearchForm />
-          </section>
-
-          <section className="content-stack">
-            <div className="section-heading">
-              <span className="section-kicker"><ShieldCheck size={16} /> Live Check</span>
-              <h2>{t('home.liveCheck')}</h2>
-              <p>{t('home.liveCheckCopy')}</p>
-            </div>
-
-            <section className="probe-grid" id="checks">
-              {probes.map((probe) => (
-                <ProbeCard key={probe.id} probe={probe} result={results[probe.id]} />
-              ))}
+              <LookupSearchForm />
             </section>
 
-            <div className="route-section" id="compare">
-              <RouteVerdict verdict={verdict} results={results} probes={probes} />
-            </div>
-          </section>
-        </>
-      )}
+            <section className="content-stack">
+              <div className="section-heading">
+                <span className="section-kicker"><ShieldCheck size={16} /> Live Check</span>
+                <h2>{t('home.liveCheck')}</h2>
+                <p>{t('home.liveCheckCopy')}</p>
+              </div>
+
+              <section className="probe-grid" id="checks">
+                {probes.map((probe) => (
+                  <ProbeCard key={probe.id} probe={probe} result={results[probe.id]} />
+                ))}
+              </section>
+
+              <div className="route-section" id="compare">
+                <RouteVerdict verdict={verdict} results={results} probes={probes} />
+              </div>
+            </section>
+          </>
+        )}
+        <SiteFooter />
+      </>
     </main>
   );
 }
