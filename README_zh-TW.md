@@ -101,7 +101,11 @@ VITE_CDN_ALIYUN_PROBE_URL       可選自有阿里雲 ESA 探針位址
 
 ## 自建 GeoAPI
 
-這個倉庫發布的是前端。如果繼續使用 Chitanda 預設介面，不需要自己搭建 GeoAPI；如果要自部署，請先提供一個相容的 HTTP 服務，並在建置前把 `VITE_GEOIP_BASE` 指向它。
+這個倉庫發布的是前端。如果繼續使用 Chitanda 預設介面，不需要自己搭建 GeoAPI；如果要自部署，請使用完全開源的 API 專案：
+
+https://github.com/violetaini/chitanda-geoip-api
+
+這個專案包含 Node.js API 服務、資料庫下載腳本、systemd/Nginx 範例，以及每天自動打包公開 IP 庫到 GitHub Release 的工作流。部署完成後，在建置本站前把 `VITE_GEOIP_BASE` 指向你的 API。
 
 需要支援的介面：
 
@@ -122,6 +126,8 @@ GeoIP 回傳值應包含前端使用的欄位：`ip`、`country_code`、`country
 4. 當資料庫回傳城市但缺少經緯度時，用城市中心點表補座標。
 5. 用 Nginx 或其他邊緣服務把 `/api/geoip`、`/api/myip`、`/api/health` 反代到本地 API。
 6. 如果 API 不和前端同源，在建置前設定 `VITE_GEOIP_BASE` 為公開 API 基礎位址。
+
+推薦的省事方式是直接下載 `chitanda-geoip-api` Releases 裡的最新 `chitanda-geoip-api-with-data.tar.gz`。它已經包含 API 源碼、部署範例和啟動服務所需的公開資料庫檔案。
 
 資料庫下載憑據、付費資料庫授權、私有探針位址和伺服器密鑰必須留在服務端。不要把它們放進 `VITE_*` 變數，因為 Vite 建置後這些值會暴露給瀏覽器。
 

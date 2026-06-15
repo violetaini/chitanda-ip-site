@@ -101,7 +101,11 @@ Fork やセルフホストでは、`npm run build` または GitHub Actions の�
 
 ## セルフホスト GeoAPI
 
-このリポジトリはフロントエンドを公開しています。既定の Chitanda エンドポイントを使う場合、自前の GeoAPI は不要です。セルフホストする場合は、互換 HTTP サービスを用意し、ビルド前に `VITE_GEOIP_BASE` をその API に向けてください。
+このリポジトリはフロントエンドを公開しています。既定の Chitanda エンドポイントを使う場合、自前の GeoAPI は不要です。セルフホストする場合は、完全にオープンソースの API プロジェクトを使えます：
+
+https://github.com/violetaini/chitanda-geoip-api
+
+このプロジェクトには Node.js API サービス、データベースダウンロードスクリプト、systemd/Nginx の例、公開 IP データベースを毎日 GitHub Release にパッケージする workflow が含まれています。デプロイ後、このフロントエンドをビルドする前に `VITE_GEOIP_BASE` を自分の API に向けてください。
 
 必要なエンドポイント：
 
@@ -122,6 +126,8 @@ GeoIP レスポンスには UI が使うフィールドを含めます：`ip`、
 4. データベースが都市名だけ返し座標を返さない場合に備え、都市中心点のフォールバック表を用意します。
 5. Nginx などで `/api/geoip`、`/api/myip`、`/api/health` をローカル API にリバースプロキシします。
 6. API がフロントエンドと同一オリジンでない場合は、公開 API ベース URL を `VITE_GEOIP_BASE` に設定してからビルドします。
+
+手早く始めるには、`chitanda-geoip-api` Releases から最新の `chitanda-geoip-api-with-data.tar.gz` をダウンロードします。API ソース、デプロイ例、サービス起動に必要な公開データベースファイルが含まれています。
 
 データベースのダウンロード認証情報、有料データベースのライセンス、非公開プローブ、サーバー鍵はサーバー側に置いてください。`VITE_*` 変数はビルド後にブラウザーへ公開されるため、秘密情報を入れないでください。
 

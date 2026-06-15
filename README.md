@@ -105,7 +105,11 @@ Repository badges, license/copyright text, package metadata, and release artifac
 
 ## Self-hosted GeoAPI
 
-This repository publishes the front end. If you keep the default Chitanda endpoints, you do not need to run your own GeoAPI. For a self-hosted deployment, provide a compatible HTTP service and point `VITE_GEOIP_BASE` to it before building.
+This repository publishes the front end. If you keep the default Chitanda endpoints, you do not need to run your own GeoAPI. For a self-hosted deployment, use the fully open-source API project:
+
+https://github.com/violetaini/chitanda-geoip-api
+
+That project contains the Node.js API service, database downloader, systemd/Nginx examples, and a daily GitHub Actions workflow that packages the service with public IP databases into a Release asset. After deploying it, point `VITE_GEOIP_BASE` to your API before building this front end.
 
 Required endpoints:
 
@@ -126,6 +130,8 @@ A typical setup is:
 4. Add a city-center fallback table when your database returns a city without coordinates.
 5. Reverse proxy `/api/geoip`, `/api/myip`, and `/api/health` from Nginx or another edge server to the local API.
 6. Set `VITE_GEOIP_BASE` to the public API base URL if it is not served from the same origin.
+
+The recommended shortcut is to download the latest `chitanda-geoip-api-with-data.tar.gz` asset from `chitanda-geoip-api` Releases. It already contains the API source, deployment examples, and the public database files needed to start the service.
 
 Database download credentials, paid database licenses, private probe endpoints, and server keys must stay on the server side. Do not put them in `VITE_*` variables because Vite exposes those values to browsers after build.
 
