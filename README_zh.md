@@ -99,6 +99,32 @@ VITE_CDN_ALIYUN_PROBE_URL       可选自有阿里云 ESA 探针地址
 
 仓库徽章、许可证/版权文字、package 元信息和 Release 产物名称属于源码维护项，不纳入 env 自定义层。
 
+## 自建 GeoAPI
+
+这个仓库发布的是前端。如果继续使用 Chitanda 默认接口，不需要自己搭建 GeoAPI；如果要自部署，请先提供一个兼容的 HTTP 服务，并在构建前把 `VITE_GEOIP_BASE` 指向它。
+
+需要支持的接口：
+
+```text
+GET /api/geoip
+GET /api/geoip/{ip}
+GET /api/myip
+GET /api/health
+```
+
+GeoIP 返回值应包含前端使用的字段：`ip`、`country_code`、`country`、`region`、`city`、`asn`、`organization`、`isp`、`latitude`、`longitude`、`timezone`、`offset`、`continent_code`。
+
+常见搭建方式：
+
+1. 在服务端运行一个本地 API，例如 Node.js 服务，监听 `127.0.0.1`。
+2. 使用兼容 MaxMind 的 City 和 ASN MMDB 数据库做全球查询。
+3. 可选接入 `ip2region` xdb，优化中国大陆省市和运营商文本。
+4. 当数据库返回城市但缺少经纬度时，用城市中心点表补坐标。
+5. 用 Nginx 或其他边缘服务把 `/api/geoip`、`/api/myip`、`/api/health` 反代到本地 API。
+6. 如果 API 不和前端同源，在构建前设置 `VITE_GEOIP_BASE` 为公开 API 基础地址。
+
+数据库下载凭据、付费数据库授权、私有探针地址和服务器密钥必须留在服务端。不要把它们放进 `VITE_*` 变量，因为 Vite 构建后这些值会暴露给浏览器。
+
 ## 构建
 
 ```bash

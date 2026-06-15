@@ -99,6 +99,32 @@ Fork やセルフホストでは、`npm run build` または GitHub Actions の�
 
 リポジトリバッジ、ライセンス/著作権文言、package メタデータ、Release 成果物名はソース管理項目であり、env カスタマイズ層の対象外です。
 
+## セルフホスト GeoAPI
+
+このリポジトリはフロントエンドを公開しています。既定の Chitanda エンドポイントを使う場合、自前の GeoAPI は不要です。セルフホストする場合は、互換 HTTP サービスを用意し、ビルド前に `VITE_GEOIP_BASE` をその API に向けてください。
+
+必要なエンドポイント：
+
+```text
+GET /api/geoip
+GET /api/geoip/{ip}
+GET /api/myip
+GET /api/health
+```
+
+GeoIP レスポンスには UI が使うフィールドを含めます：`ip`、`country_code`、`country`、`region`、`city`、`asn`、`organization`、`isp`、`latitude`、`longitude`、`timezone`、`offset`、`continent_code`。
+
+一般的な構成：
+
+1. サーバー側で Node.js などのローカル API を `127.0.0.1` に起動します。
+2. グローバル検索には MaxMind 互換の City と ASN MMDB データベースを読み込みます。
+3. 中国大陸の省市と ISP 表記を改善する場合は、任意で `ip2region` xdb を追加します。
+4. データベースが都市名だけ返し座標を返さない場合に備え、都市中心点のフォールバック表を用意します。
+5. Nginx などで `/api/geoip`、`/api/myip`、`/api/health` をローカル API にリバースプロキシします。
+6. API がフロントエンドと同一オリジンでない場合は、公開 API ベース URL を `VITE_GEOIP_BASE` に設定してからビルドします。
+
+データベースのダウンロード認証情報、有料データベースのライセンス、非公開プローブ、サーバー鍵はサーバー側に置いてください。`VITE_*` 変数はビルド後にブラウザーへ公開されるため、秘密情報を入れないでください。
+
 ## ビルド
 
 ```bash

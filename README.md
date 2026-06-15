@@ -103,6 +103,32 @@ For a fork or self-hosted build, edit `.env.production` before running `npm run 
 
 Repository badges, license/copyright text, package metadata, and release artifact names are source-maintenance fields and are not part of the env customization layer.
 
+## Self-hosted GeoAPI
+
+This repository publishes the front end. If you keep the default Chitanda endpoints, you do not need to run your own GeoAPI. For a self-hosted deployment, provide a compatible HTTP service and point `VITE_GEOIP_BASE` to it before building.
+
+Required endpoints:
+
+```text
+GET /api/geoip
+GET /api/geoip/{ip}
+GET /api/myip
+GET /api/health
+```
+
+The GeoIP response should include the fields used by the UI: `ip`, `country_code`, `country`, `region`, `city`, `asn`, `organization`, `isp`, `latitude`, `longitude`, `timezone`, `offset`, and `continent_code`.
+
+A typical setup is:
+
+1. Run a small server-side API, for example a Node.js service, on `127.0.0.1`.
+2. Load MaxMind-compatible City and ASN MMDB databases for global lookup.
+3. Optionally add `ip2region` xdb data for better Mainland China province, city, and ISP text.
+4. Add a city-center fallback table when your database returns a city without coordinates.
+5. Reverse proxy `/api/geoip`, `/api/myip`, and `/api/health` from Nginx or another edge server to the local API.
+6. Set `VITE_GEOIP_BASE` to the public API base URL if it is not served from the same origin.
+
+Database download credentials, paid database licenses, private probe endpoints, and server keys must stay on the server side. Do not put them in `VITE_*` variables because Vite exposes those values to browsers after build.
+
 ## Build
 
 ```bash

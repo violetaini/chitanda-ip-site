@@ -99,6 +99,32 @@ VITE_CDN_ALIYUN_PROBE_URL       可選自有阿里雲 ESA 探針位址
 
 倉庫徽章、授權/版權文字、package 元資訊和 Release 產物名稱屬於源碼維護項，不納入 env 自定義層。
 
+## 自建 GeoAPI
+
+這個倉庫發布的是前端。如果繼續使用 Chitanda 預設介面，不需要自己搭建 GeoAPI；如果要自部署，請先提供一個相容的 HTTP 服務，並在建置前把 `VITE_GEOIP_BASE` 指向它。
+
+需要支援的介面：
+
+```text
+GET /api/geoip
+GET /api/geoip/{ip}
+GET /api/myip
+GET /api/health
+```
+
+GeoIP 回傳值應包含前端使用的欄位：`ip`、`country_code`、`country`、`region`、`city`、`asn`、`organization`、`isp`、`latitude`、`longitude`、`timezone`、`offset`、`continent_code`。
+
+常見搭建方式：
+
+1. 在服務端執行一個本地 API，例如 Node.js 服務，監聽 `127.0.0.1`。
+2. 使用相容 MaxMind 的 City 和 ASN MMDB 資料庫做全球查詢。
+3. 可選接入 `ip2region` xdb，優化中國大陸省市與營運商文字。
+4. 當資料庫回傳城市但缺少經緯度時，用城市中心點表補座標。
+5. 用 Nginx 或其他邊緣服務把 `/api/geoip`、`/api/myip`、`/api/health` 反代到本地 API。
+6. 如果 API 不和前端同源，在建置前設定 `VITE_GEOIP_BASE` 為公開 API 基礎位址。
+
+資料庫下載憑據、付費資料庫授權、私有探針位址和伺服器密鑰必須留在服務端。不要把它們放進 `VITE_*` 變數，因為 Vite 建置後這些值會暴露給瀏覽器。
+
 ## 建置
 
 ```bash
