@@ -96,9 +96,9 @@ VITE_CDN_TENCENT_PROBE_URL      任意の自前 Tencent CDN プローブ URL
 VITE_CDN_ALIYUN_PROBE_URL       任意の自前 Alibaba Cloud ESA プローブ URL
 ```
 
-`VITE_GEOIP_BASE` が未設定の場合、ローカル開発では公開 Chitanda GeoIP エンドポイントを使用し、本番環境では同一オリジンの `/api/geoip` を使用します。
+`VITE_GEOIP_BASE` が未設定の場合、ローカル開発では Chitanda GeoIP エンドポイントを使用し、本番環境では同一オリジンの `/api/geoip` を使用します。Chitanda エンドポイントは公式サイト専用に制限されているため、fork やセルフホストでは自分の GeoAPI を用意し、ビルド前に `VITE_GEOIP_BASE` を設定してください。
 
-Fork やセルフホストでは、`npm run build` または GitHub Actions のリリースビルド前に `.env.production` を編集してください。コミット済みの `.env.production` にはこのサイトの公開デフォルトが入っており、通常のデプロイではサイト名、ヒーロータイトル、ドメイン、公開 API ベース URL、avatar/favicon、GeoIP とプローブエンドポイント、公開ブラウザー用の地図 Key、任意の公開 STUN、任意の CDN プローブをここで上書きできます。`.env.production.local` は優先度が高く git に無視されるため、ローカルまたは GitHub Release に公開しない非公開サーバービルドだけに使います。
+Fork やセルフホストでは、`npm run build` または GitHub Actions のリリースビルド前に `.env.production` を編集してください。コミット済みの `.env.production` は公式サイト用の参考設定です。サイト名、ヒーロータイトル、ドメイン、公開 API ベース URL、avatar/favicon、GeoIP とプローブエンドポイント、公開ブラウザー用の地図 Key、任意の公開 STUN、任意の CDN プローブを自分の値に置き換えてください。同一オリジンで `/api/geoip` をリバースプロキシしない場合は、`VITE_GEOIP_BASE` を自分の GeoAPI に設定する必要があります。`.env.production.local` は優先度が高く git に無視されるため、ローカルまたは GitHub Release に公開しない非公開サーバービルドだけに使います。
 
 **すべての `VITE_*` 値はビルド後にブラウザー配信物へ入ります。** 非公開の地図 Key や自前 STUN IP を公開リポジトリや GitHub Release ビルドにコミットしないでください。コミット済み env ファイルでは `VITE_TENCENT_MAP_KEY`、`VITE_GOOGLE_MAPS_EMBED_KEY`、`VITE_OWN_STUN_URL` を空のままにします。ここに置けるのは公開されてもよい、ドメイン制限済みのブラウザー Key だけです。秘密にする必要がある値は Vite 環境変数ではなく、サーバー側プロキシで扱ってください。
 
@@ -106,7 +106,7 @@ Fork やセルフホストでは、`npm run build` または GitHub Actions の�
 
 ## セルフホスト GeoAPI
 
-このリポジトリはフロントエンドを公開しています。既定の Chitanda エンドポイントを使う場合、自前の GeoAPI は不要です。セルフホストする場合は、完全にオープンソースの API プロジェクトを使えます：
+このリポジトリはフロントエンドだけを公開しています。fork やセルフホストでは自分の GeoAPI を実行する必要があります。既定の Chitanda エンドポイントは公式サイト専用に制限されています。完全にオープンソースの API プロジェクトを使えます：
 
 https://github.com/violetaini/chitanda-geoip-api
 

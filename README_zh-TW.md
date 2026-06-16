@@ -96,9 +96,9 @@ VITE_CDN_TENCENT_PROBE_URL      可選自有騰訊 CDN 探針位址
 VITE_CDN_ALIYUN_PROBE_URL       可選自有阿里雲 ESA 探針位址
 ```
 
-未設定 `VITE_GEOIP_BASE` 時，本地開發使用公開 Chitanda GeoIP 介面，生產環境使用同源 `/api/geoip`。
+未設定 `VITE_GEOIP_BASE` 時，本地開發使用 Chitanda GeoIP 介面，生產環境使用同源 `/api/geoip`。Chitanda 介面限制為本站使用，fork 或自部署必須自行部署 GeoAPI，並在建置前設定 `VITE_GEOIP_BASE`。
 
-別人 fork 或自部署時，修改 `.env.production` 後再執行 `npm run build` 或 GitHub Actions 發布建置即可。倉庫內的 `.env.production` 保留本站公開預設值，普通部署可透過它覆蓋站點名、首頁大標題、網域、公開 API 基礎地址、頭像/favicon、GeoIP 與探針端點、公開瀏覽器地圖 Key、可選公開 STUN、可選 CDN 探針。`.env.production.local` 優先級更高且被 git 忽略，只用於本地或明確不會發布到 GitHub Release 的私有伺服器建置。
+別人 fork 或自部署時，修改 `.env.production` 後再執行 `npm run build` 或 GitHub Actions 發布建置即可。倉庫內的 `.env.production` 是官方站點參考設定；請把官方值替換為自己的站點名、首頁大標題、網域、公開 API 基礎地址、頭像/favicon、GeoIP 與探針端點、公開瀏覽器地圖 Key、可選公開 STUN、可選 CDN 探針。除非你在同源反代 `/api/geoip`，否則必須把 `VITE_GEOIP_BASE` 設定為自己的 GeoAPI。`.env.production.local` 優先級更高且被 git 忽略，只用於本地或明確不會發布到 GitHub Release 的私有伺服器建置。
 
 **所有 `VITE_*` 值在建置後都會進入瀏覽器包。** 不要把私有地圖 Key 或自建 STUN IP 提交到公開倉庫或 GitHub Release 建置裡。已提交的環境文件中 `VITE_TENCENT_MAP_KEY`、`VITE_GOOGLE_MAPS_EMBED_KEY` 和 `VITE_OWN_STUN_URL` 必須保持空；這裡只適合放公開、已限制網域的瀏覽器 Key，真正需要保密的值必須走服務端代理，不能放 Vite 環境變數。
 
@@ -106,7 +106,7 @@ VITE_CDN_ALIYUN_PROBE_URL       可選自有阿里雲 ESA 探針位址
 
 ## 自建 GeoAPI
 
-這個倉庫發布的是前端。如果繼續使用 Chitanda 預設介面，不需要自己搭建 GeoAPI；如果要自部署，請使用完全開源的 API 專案：
+這個倉庫發布的是前端。fork 或自部署必須自行執行 GeoAPI，因為預設的 Chitanda 介面限制為本站使用。可使用完全開源的 API 專案：
 
 https://github.com/violetaini/chitanda-geoip-api
 

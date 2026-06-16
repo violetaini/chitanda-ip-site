@@ -100,9 +100,9 @@ VITE_CDN_TENCENT_PROBE_URL      Optional self-owned Tencent CDN probe URL
 VITE_CDN_ALIYUN_PROBE_URL       Optional self-owned Alibaba Cloud ESA probe URL
 ```
 
-When `VITE_GEOIP_BASE` is not set, local development uses the public Chitanda GeoIP endpoint and production uses the same-origin `/api/geoip` path.
+When `VITE_GEOIP_BASE` is not set, local development uses the Chitanda GeoIP endpoint and production uses the same-origin `/api/geoip` path. The Chitanda endpoint is restricted to this site, so forks and self-hosted deployments must provide their own GeoAPI and set `VITE_GEOIP_BASE` before building.
 
-For a fork or self-hosted build, edit `.env.production` before running `npm run build` or the GitHub Actions release workflow. The checked-in file keeps Chitanda's public defaults, so changing it is enough for the normal deployment surface: site name, hero title, domain, public API base URL, avatar/favicon paths, GeoIP and probe endpoints, public browser map keys, optional public STUN, and optional CDN probes. `.env.production.local` has higher priority and is ignored by git, so use it only for local or private server builds that you intentionally do not publish as GitHub Release artifacts.
+For a fork or self-hosted build, edit `.env.production` before running `npm run build` or the GitHub Actions release workflow. The checked-in file is the official-site reference configuration; replace the official values with your own site name, hero title, domain, public API base URL, avatar/favicon paths, GeoIP and probe endpoints, public browser map keys, optional public STUN, and optional CDN probes. Set `VITE_GEOIP_BASE` to your own GeoAPI unless you proxy `/api/geoip` from the same origin. `.env.production.local` has higher priority and is ignored by git, so use it only for local or private server builds that you intentionally do not publish as GitHub Release artifacts.
 
 **Every `VITE_*` value is browser-visible after build.** Do not commit private map keys or self-owned STUN IPs to the public repository or GitHub Release builds. Keep `VITE_TENCENT_MAP_KEY`, `VITE_GOOGLE_MAPS_EMBED_KEY`, and `VITE_OWN_STUN_URL` empty in committed env files. Use only public, domain-restricted browser keys here; values that must remain private need a server-side proxy instead of a Vite env variable.
 
@@ -110,7 +110,7 @@ Repository badges, license/copyright text, package metadata, and release artifac
 
 ## Self-hosted GeoAPI
 
-This repository publishes the front end. If you keep the default Chitanda endpoints, you do not need to run your own GeoAPI. For a self-hosted deployment, use the fully open-source API project:
+This repository publishes the front end only. Forks and self-hosted deployments must run their own GeoAPI because the default Chitanda endpoint is restricted to the official site. Use the fully open-source API project:
 
 https://github.com/violetaini/chitanda-geoip-api
 
