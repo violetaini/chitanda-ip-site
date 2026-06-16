@@ -13,7 +13,12 @@
 
 </div>
 
-[English](README.md) | [简体中文](README_zh.md) | [繁體中文](README_zh-TW.md) | [日本語](README_ja.md)
+<p align="center">
+  <a href="README.md">English</a> |
+  <a href="README_zh.md">简体中文</a> |
+  <a href="README_zh-TW.md">繁體中文</a> |
+  <a href="README_ja.md">日本語</a>
+</p>
 
 [ip.chitanda.net](https://ip.chitanda.net/) 的 React + Vite 前端。專案提供瀏覽器端 IP 偵測、IP 歸屬查詢、WebRTC/STUN 網路偵測、CDN 節點查詢、DNS 出口查詢、API 文件與服務狀態面板。
 

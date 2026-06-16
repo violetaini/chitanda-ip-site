@@ -13,7 +13,12 @@
 
 </div>
 
-[English](README.md) | [简体中文](README_zh.md) | [繁體中文](README_zh-TW.md) | [日本語](README_ja.md)
+<p align="center">
+  <a href="README.md">English</a> |
+  <a href="README_zh.md">简体中文</a> |
+  <a href="README_zh-TW.md">繁體中文</a> |
+  <a href="README_ja.md">日本語</a>
+</p>
 
 [ip.chitanda.net](https://ip.chitanda.net/) 向けの React + Vite フロントエンドです。ブラウザ側の IP 検出、IP 位置情報検索、WebRTC/STUN ネットワークチェック、CDN ノード検索、DNS 出口検索、API ドキュメント、サービス状態ダッシュボードを提供します。
 
