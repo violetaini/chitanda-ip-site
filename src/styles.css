@@ -4970,6 +4970,11 @@ html[data-cursor="visible"] .cursor-glow {
   opacity: 1;
 }
 
+html[data-cursor-suspended="true"] .cursor-glow,
+html[data-cursor-suspended="true"] .cursor-particles {
+  opacity: 0 !important;
+}
+
 html[data-cursor-active="true"] .cursor-glow {
   transform: translate(-50%, -50%) scale(1.65);
   border-color: rgba(255, 126, 179, 0.75);

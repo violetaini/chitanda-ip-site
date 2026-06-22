@@ -864,7 +864,7 @@ function ProbeCard({ probe, result }) {
   );
 }
 
-function TencentLocationMap({ coordinate, onUnavailable }) {
+function TencentLocationMap({ coordinate, onUnavailable, onPointerEnter, onPointerLeave, onPointerCancel }) {
   const { t } = useI18n();
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
@@ -945,7 +945,12 @@ function TencentLocationMap({ coordinate, onUnavailable }) {
   }, [coordinate.latitude, coordinate.longitude]);
 
   return (
-    <div className="location-map-stage">
+    <div
+      className="location-map-stage"
+      onPointerEnter={onPointerEnter}
+      onPointerLeave={onPointerLeave}
+      onPointerCancel={onPointerCancel}
+    >
       <div className="location-map-canvas" ref={mapRef} aria-label={t('map.tencentAria')} />
       {state !== 'ready' && (
         <div className="location-map-overlay">
@@ -959,7 +964,7 @@ function TencentLocationMap({ coordinate, onUnavailable }) {
   );
 }
 
-function GoogleLocationMap({ coordinate }) {
+function GoogleLocationMap({ coordinate, onPointerEnter, onPointerLeave, onPointerCancel }) {
   const { t } = useI18n();
   const query = `${coordinate.latitude},${coordinate.longitude}`;
   const src = GOOGLE_MAPS_EMBED_KEY
@@ -967,7 +972,12 @@ function GoogleLocationMap({ coordinate }) {
     : `https://www.google.com/maps?q=${encodeURIComponent(query)}&z=10&output=embed`;
 
   return (
-    <div className="location-map-stage">
+    <div
+      className="location-map-stage"
+      onPointerEnter={onPointerEnter}
+      onPointerLeave={onPointerLeave}
+      onPointerCancel={onPointerCancel}
+    >
       <iframe
         title={t('map.googleTitle')}
         src={src}
@@ -979,7 +989,7 @@ function GoogleLocationMap({ coordinate }) {
   );
 }
 
-function BingLocationMap({ coordinate }) {
+function BingLocationMap({ coordinate, onPointerEnter, onPointerLeave, onPointerCancel }) {
   const { t } = useI18n();
   const stageRef = useRef(null);
   const iframeRef = useCallback((node) => {
@@ -1018,7 +1028,13 @@ function BingLocationMap({ coordinate }) {
   const src = `https://www.bing.com/maps/embed?h=${size.height}&w=${size.width}&cp=${coordinate.latitude}~${coordinate.longitude}&lvl=10&typ=d&sty=r&src=SHELL&FORM=MBEDV8`;
 
   return (
-    <div className="location-map-stage" ref={stageRef}>
+    <div
+      className="location-map-stage"
+      ref={stageRef}
+      onPointerEnter={onPointerEnter}
+      onPointerLeave={onPointerLeave}
+      onPointerCancel={onPointerCancel}
+    >
       <iframe
         ref={iframeRef}
         title={t('map.bingTitle')}
@@ -1032,14 +1048,35 @@ function BingLocationMap({ coordinate }) {
   );
 }
 
+function useCursorSuspension(suspended) {
+  useEffect(() => {
+    const root = document.documentElement;
+    if (suspended) {
+      root.dataset.cursorSuspended = 'true';
+    } else {
+      delete root.dataset.cursorSuspended;
+    }
+
+    return () => {
+      delete root.dataset.cursorSuspended;
+    };
+  }, [suspended]);
+}
+
 function LocationMap({ result }) {
   const { t } = useI18n();
   const coordinate = getCoordinate(result);
   const googleMapState = useGoogleMapAvailability();
   const [forcedProvider, setForcedProvider] = useState(null);
+  const [cursorSuspended, setCursorSuspended] = useState(false);
   const handleTencentMapUnavailable = useCallback(() => setForcedProvider('bing'), []);
+  const suspendCursor = useCallback(() => setCursorSuspended(true), []);
+  const resumeCursor = useCallback(() => setCursorSuspended(false), []);
+
+  useCursorSuspension(cursorSuspended);
 
   useEffect(() => {
+    setCursorSuspended(false);
     setForcedProvider(null);
   }, [result?.ip, result?.latitude, result?.longitude]);
 
@@ -1061,11 +1098,27 @@ function LocationMap({ result }) {
         <span className="map-provider-badge">{provider.badge}</span>
       </div>
       {provider.id === 'tencent' ? (
-        <TencentLocationMap coordinate={coordinate} onUnavailable={handleTencentMapUnavailable} />
+        <TencentLocationMap
+          coordinate={coordinate}
+          onUnavailable={handleTencentMapUnavailable}
+          onPointerEnter={suspendCursor}
+          onPointerLeave={resumeCursor}
+          onPointerCancel={resumeCursor}
+        />
       ) : provider.id === 'google' ? (
-        <GoogleLocationMap coordinate={coordinate} />
+        <GoogleLocationMap
+          coordinate={coordinate}
+          onPointerEnter={suspendCursor}
+          onPointerLeave={resumeCursor}
+          onPointerCancel={resumeCursor}
+        />
       ) : (
-        <BingLocationMap coordinate={coordinate} />
+        <BingLocationMap
+          coordinate={coordinate}
+          onPointerEnter={suspendCursor}
+          onPointerLeave={resumeCursor}
+          onPointerCancel={resumeCursor}
+        />
       )}
     </section>
   );
