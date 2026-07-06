@@ -5778,13 +5778,30 @@ body.status-mode {
   overflow-x: hidden;
   overflow-y: auto;
   -ms-overflow-style: none;
+  overscroll-behavior: contain;
   scrollbar-gutter: auto;
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 .status-service-list {
   gap: 14px;
   padding: 18px 18px 22px 14px;
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.status-service-list.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.status-service-list.is-dragging * {
+  user-select: none;
+}
+
+.status-service-list.is-dragging .status-service-item {
+  cursor: grabbing;
 }
 
 .status-service-list::-webkit-scrollbar,

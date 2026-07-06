@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   AlertCircle,
   Clock3,
@@ -25,6 +25,8 @@ const GROUP_ORDER = {
   '开发工具': 2,
   '社区服务': 3
 };
+
+const DRAG_SCROLL_THRESHOLD = 6;
 
 function pad(value) {
   return String(value).padStart(2, '0');
@@ -339,8 +341,85 @@ function StatusDetailPanel({ service }) {
   );
 }
 
+function useVerticalDragScroll() {
+  const dragRef = useRef({
+    active: false,
+    dragging: false,
+    pointerId: null,
+    startY: 0,
+    startScrollTop: 0,
+    suppressClick: false
+  });
+
+  const finishDrag = (event) => {
+    const state = dragRef.current;
+    if (!state.active || state.pointerId !== event.pointerId) return;
+
+    if (state.dragging) {
+      state.suppressClick = true;
+      window.setTimeout(() => {
+        dragRef.current.suppressClick = false;
+      }, 0);
+    }
+
+    state.active = false;
+    state.dragging = false;
+    state.pointerId = null;
+    event.currentTarget.classList.remove('is-dragging');
+
+    if (event.currentTarget.hasPointerCapture?.(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  };
+
+  return {
+    onPointerDown(event) {
+      if (event.pointerType === 'touch') return;
+      if (event.button != null && event.button !== 0) return;
+
+      const target = event.currentTarget;
+      if (target.scrollHeight <= target.clientHeight + 1) return;
+
+      dragRef.current = {
+        active: true,
+        dragging: false,
+        pointerId: event.pointerId,
+        startY: event.clientY,
+        startScrollTop: target.scrollTop,
+        suppressClick: false
+      };
+    },
+    onPointerMove(event) {
+      const state = dragRef.current;
+      if (!state.active || state.pointerId !== event.pointerId) return;
+
+      const deltaY = event.clientY - state.startY;
+      if (!state.dragging && Math.abs(deltaY) >= DRAG_SCROLL_THRESHOLD) {
+        state.dragging = true;
+        event.currentTarget.classList.add('is-dragging');
+        event.currentTarget.setPointerCapture?.(event.pointerId);
+      }
+
+      if (state.dragging) {
+        event.preventDefault();
+        event.currentTarget.scrollTop = state.startScrollTop - deltaY;
+      }
+    },
+    onPointerUp: finishDrag,
+    onPointerCancel: finishDrag,
+    onLostPointerCapture: finishDrag,
+    onClickCapture(event) {
+      if (!dragRef.current.suppressClick) return;
+      dragRef.current.suppressClick = false;
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  };
+}
+
 function StatusBrowser({ sections, selectedKey, onSelect }) {
   const { t } = useI18n();
+  const serviceListDrag = useVerticalDragScroll();
   const groups = [
     { key: 'failing', title: sectionTitleFor('failing', t), copy: t('status.itemsNeedAttention', { count: sections.failing.length }), items: sections.failing },
     { key: 'normal', title: sectionTitleFor('normal', t), copy: t('status.itemsNormal', { count: sections.normal.length }), items: sections.normal },
@@ -353,7 +432,7 @@ function StatusBrowser({ sections, selectedKey, onSelect }) {
   return (
     <section className="status-browser" aria-label={t('status.detailsAria')}>
       <div className="status-service-list-frame">
-        <div className="status-service-list">
+        <div className="status-service-list" {...serviceListDrag}>
           {groups.map((group) => (
             <div className="status-service-group" key={group.key}>
               <div className="status-service-group__head">
