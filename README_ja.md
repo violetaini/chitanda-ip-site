@@ -27,6 +27,7 @@
 - 簡体字中国語、繁体字中国語、日本語、英語の多言語ルートと UI。
 - ブラウザの優先言語に基づく自動リダイレクトと、保存済み言語設定の優先利用。
 - 国内、国際、Google、独立プローブによる IP 検出。
+- 裸の `curl ip.chitanda.net` によるプレーンテキスト client IP 出力。
 - IP 位置情報検索と地図フォールバック。
 - WebRTC/STUN の公開候補アドレス検出。
 - ブラウザ遅延、CDN ノード、DNS 出口検索ツール。
@@ -118,8 +119,11 @@ https://github.com/violetaini/chitanda-geoip-api
 GET /api/geoip
 GET /api/geoip/{ip}
 GET /api/myip
+GET /api/myip?format=text
 GET /api/health
 ```
+
+CLI 形式の IP 応答を提供する場合は、エッジとリバースプロキシで例外を設定し、裸の `curl ip.chitanda.net` が HTTPS 強制リダイレクトで止まらず GeoAPI の `/myip?format=text` に到達するようにします。
 
 GeoIP レスポンスには UI が使うフィールドを含めます：`ip`、`country_code`、`country`、`region`、`city`、`asn`、`organization`、`isp`、`latitude`、`longitude`、`timezone`、`offset`、`continent_code`。
 

@@ -1450,9 +1450,9 @@ function getApiEndpoints(t, locale) {
     id: 'myip',
     label: t('api.myip'),
     method: 'GET',
-    path: '/api/myip',
+    path: '/api/myip?format=text',
     description: t('api.myipDescription'),
-    curl: `curl -fsS ${API_BASE_URL}/api/myip`,
+    curl: `curl -fsS ${SITE_CONFIG.siteHostname}`,
     response: `203.0.113.10`,
     fieldGroups: [
       {

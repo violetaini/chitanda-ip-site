@@ -27,6 +27,7 @@
 - 支持简体中文、繁体中文、日语和英语的多语言路由与界面。
 - 根据浏览器首选语言自动跳转，并优先使用用户保存的语言偏好。
 - 支持国内、境外、Google、独立探针四路 IP 检测。
+- 支持裸 `curl ip.chitanda.net` 输出纯文本客户端 IP。
 - 支持 IP 归属查询和地图降级策略。
 - 支持 WebRTC/STUN 公网候选地址检测。
 - 支持浏览器延迟、CDN 节点和 DNS 出口查询工具。
@@ -118,8 +119,11 @@ https://github.com/violetaini/chitanda-geoip-api
 GET /api/geoip
 GET /api/geoip/{ip}
 GET /api/myip
+GET /api/myip?format=text
 GET /api/health
 ```
+
+如果要提供命令行式 IP 回显，需要在边缘和反向代理里配置例外，让裸 `curl ip.chitanda.net` 到达 GeoAPI 的 `/myip?format=text`，而不是在到达源站前就被强制跳转到 HTTPS。
 
 GeoIP 返回值应包含前端使用的字段：`ip`、`country_code`、`country`、`region`、`city`、`asn`、`organization`、`isp`、`latitude`、`longitude`、`timezone`、`offset`、`continent_code`。
 

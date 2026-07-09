@@ -29,6 +29,7 @@ React + Vite front end for [ip.chitanda.net](https://ip.chitanda.net/). The site
 - Multi-language routes and localized UI for Simplified Chinese, Traditional Chinese, Japanese, and English.
 - Browser preference redirect with a saved language preference override.
 - IP detection from domestic, international, Google, and independent probe endpoints.
+- Bare `curl ip.chitanda.net` support for plain-text client IP output.
 - IP lookup with map fallback handling.
 - WebRTC/STUN public candidate detection.
 - Browser latency, CDN node, and DNS exit lookup tools.
@@ -122,8 +123,11 @@ Required endpoints:
 GET /api/geoip
 GET /api/geoip/{ip}
 GET /api/myip
+GET /api/myip?format=text
 GET /api/health
 ```
+
+For CLI-style IP echo, configure the edge and reverse proxy so bare `curl ip.chitanda.net` reaches the GeoAPI `/myip?format=text` path instead of being forced to HTTPS before the origin can route it.
 
 The GeoIP response should include the fields used by the UI: `ip`, `country_code`, `country`, `region`, `city`, `asn`, `organization`, `isp`, `latitude`, `longitude`, `timezone`, `offset`, and `continent_code`.
 
