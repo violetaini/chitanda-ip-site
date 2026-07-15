@@ -743,7 +743,26 @@ label,
   color: var(--ink);
   font-size: 13px;
   line-height: 1.35;
+}
+
+.meta-grid strong {
+  overflow-wrap: break-word;
+  word-break: keep-all;
+  line-break: strict;
+}
+
+.compare-list strong {
   overflow-wrap: anywhere;
+}
+
+.timezone-value {
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.timezone-cjk,
+.timezone-delimiter {
+  white-space: nowrap;
 }
 
 .error-text {
@@ -1834,6 +1853,10 @@ label,
   overflow: visible;
   -webkit-line-clamp: unset;
   line-clamp: unset;
+}
+
+.meta-grid strong.timezone-value {
+  font-size: 13px;
 }
 
 .route-section {

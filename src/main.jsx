@@ -797,6 +797,36 @@ function StatusIcon({ state }) {
   return <HelpCircle size={18} />;
 }
 
+function renderTimezoneText(value) {
+  const text = String(value || '');
+  const nodes = [];
+  const cjkPattern = /[\u3040-\u30ff\u3400-\u9fff\uf900-\ufaff\uac00-\ud7af]+/g;
+  let key = 0;
+
+  for (const part of text.split(/([/\\])/)) {
+    if (!part) continue;
+    if (part === '/' || part === '\\') {
+      nodes.push(<span className="timezone-delimiter" key={`delimiter-${key++}`}>{part}</span>);
+      nodes.push(<wbr key={`break-${key++}`} />);
+      continue;
+    }
+
+    let lastIndex = 0;
+    for (const match of part.matchAll(cjkPattern)) {
+      if (match.index > lastIndex) {
+        nodes.push(<span key={`text-${key++}`}>{part.slice(lastIndex, match.index)}</span>);
+      }
+      nodes.push(<span className="timezone-cjk" key={`cjk-${key++}`}>{match[0]}</span>);
+      lastIndex = match.index + match[0].length;
+    }
+    if (lastIndex < part.length) {
+      nodes.push(<span key={`text-${key++}`}>{part.slice(lastIndex)}</span>);
+    }
+  }
+
+  return nodes.length ? nodes : text;
+}
+
 function ProbeCard({ probe, result }) {
   const { t } = useI18n();
   const Icon = probe.icon;
@@ -856,7 +886,7 @@ function ProbeCard({ probe, result }) {
         </div>
         <div>
           <label>{t('probe.timezone')}</label>
-          <strong title={timezoneText}>{timezoneText}</strong>
+          <strong className="timezone-value" title={timezoneText}>{renderTimezoneText(timezoneText)}</strong>
         </div>
       </div>
 
