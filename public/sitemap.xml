@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://ip.chitanda.net/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/zh-tw/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/ja/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/en/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/webrtc/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/webrtc/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/webrtc/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/webrtc/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/webrtc/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/webrtc/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/zh-tw/webrtc/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/webrtc/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/webrtc/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/webrtc/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/webrtc/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/webrtc/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/ja/webrtc/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/webrtc/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/webrtc/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/webrtc/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/webrtc/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/webrtc/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/en/webrtc/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/webrtc/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/webrtc/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/webrtc/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/webrtc/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/webrtc/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/latency/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/latency/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/latency/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/latency/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/latency/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/latency/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/zh-tw/latency/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/latency/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/latency/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/latency/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/latency/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/latency/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/ja/latency/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/latency/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/latency/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/latency/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/latency/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/latency/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/en/latency/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/latency/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/latency/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/latency/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/latency/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/latency/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/cdn-node-lookup/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/cdn-node-lookup/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/cdn-node-lookup/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/cdn-node-lookup/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/cdn-node-lookup/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/cdn-node-lookup/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/zh-tw/cdn-node-lookup/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/cdn-node-lookup/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/cdn-node-lookup/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/cdn-node-lookup/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/cdn-node-lookup/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/cdn-node-lookup/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/ja/cdn-node-lookup/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/cdn-node-lookup/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/cdn-node-lookup/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/cdn-node-lookup/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/cdn-node-lookup/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/cdn-node-lookup/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/en/cdn-node-lookup/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/cdn-node-lookup/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/cdn-node-lookup/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/cdn-node-lookup/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/cdn-node-lookup/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/cdn-node-lookup/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/dns-exit-lookup/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/dns-exit-lookup/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/dns-exit-lookup/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/dns-exit-lookup/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/dns-exit-lookup/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/dns-exit-lookup/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/zh-tw/dns-exit-lookup/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/dns-exit-lookup/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/dns-exit-lookup/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/dns-exit-lookup/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/dns-exit-lookup/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/dns-exit-lookup/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/ja/dns-exit-lookup/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/dns-exit-lookup/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/dns-exit-lookup/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/dns-exit-lookup/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/dns-exit-lookup/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/dns-exit-lookup/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/en/dns-exit-lookup/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/dns-exit-lookup/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/dns-exit-lookup/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/dns-exit-lookup/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/dns-exit-lookup/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/dns-exit-lookup/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/status/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/status/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/status/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/status/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/status/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/status/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/zh-tw/status/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/status/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/status/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/status/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/status/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/status/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/ja/status/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/status/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/status/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/status/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/status/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/status/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/en/status/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/status/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/status/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/status/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/status/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/status/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/docs/api/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/docs/api/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/docs/api/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/docs/api/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/docs/api/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/docs/api/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/zh-tw/docs/api/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/docs/api/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/docs/api/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/docs/api/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/docs/api/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/docs/api/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/ja/docs/api/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/docs/api/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/docs/api/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/docs/api/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/docs/api/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/docs/api/" />
+  </url>
+  <url>
+    <loc>https://ip.chitanda.net/en/docs/api/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ip.chitanda.net/docs/api/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://ip.chitanda.net/zh-tw/docs/api/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ip.chitanda.net/ja/docs/api/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ip.chitanda.net/en/docs/api/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ip.chitanda.net/docs/api/" />
+  </url>
+</urlset>
