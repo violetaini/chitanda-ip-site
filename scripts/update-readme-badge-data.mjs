@@ -35,7 +35,9 @@ function githubHeaders() {
 async function githubJson(url) {
   const response = await fetchWithRetry(url, { headers: githubHeaders() });
   if (!response.ok) {
-    throw new Error(`GitHub API request failed: ${response.status} ${response.statusText} ${url}`);
+    const detail = await response.text().catch(() => '');
+    const message = detail ? ` ${detail.slice(0, 300)}` : '';
+    throw new Error(`GitHub API request failed: ${response.status} ${response.statusText} ${url}${message}`);
   }
 
   return response.json();
@@ -78,19 +80,42 @@ async function weeklyCommitCount() {
 }
 
 async function fetchWithRetry(url, options, attempt = 1) {
+  const maxAttempts = 4;
+
   try {
-    return await fetch(url, options);
+    const response = await fetch(url, options);
+    if (attempt < maxAttempts && shouldRetryResponse(response)) {
+      await waitForRetry(response, attempt);
+      return fetchWithRetry(url, options, attempt + 1);
+    }
+
+    return response;
   } catch (error) {
-    if (attempt >= 4) {
+    if (attempt >= maxAttempts) {
       throw error;
     }
 
-    await new Promise((resolve) => {
-      setTimeout(resolve, attempt * 750);
-    });
+    await waitForRetry(null, attempt);
 
     return fetchWithRetry(url, options, attempt + 1);
   }
+}
+
+function shouldRetryResponse(response) {
+  return [403, 408, 409, 425, 429, 500, 502, 503, 504].includes(response.status);
+}
+
+async function waitForRetry(response, attempt) {
+  const retryAfter = response?.headers.get('retry-after');
+  const retryAfterSeconds = Number(retryAfter);
+  const retryAfterDate = retryAfter ? Date.parse(retryAfter) : NaN;
+  const delay = Number.isFinite(retryAfterSeconds) && retryAfterSeconds > 0
+    ? retryAfterSeconds * 1000
+    : Math.max(0, retryAfterDate - Date.now());
+
+  await new Promise((resolve) => {
+    setTimeout(resolve, Math.min(delay || attempt * 750, 5000));
+  });
 }
 
 function formatBytes(kilobytes) {
